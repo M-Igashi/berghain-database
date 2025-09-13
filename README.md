@@ -1,6 +1,6 @@
 # 🎵 Berghain Klubnacht Database
 
-A comprehensive database and API for tracking DJ performances at Berlin's legendary Berghain nightclub (2004-2009).
+A comprehensive database and API for tracking DJ performances at Berlin's legendary Berghain nightclub (2009-2025).
 
 [![Website](https://img.shields.io/badge/Website-berghain.ravers.workers.dev-blue)](https://berghain.ravers.workers.dev)
 [![API Status](https://img.shields.io/badge/API-Live-green)](https://berghain.ravers.workers.dev/health)
@@ -8,59 +8,60 @@ A comprehensive database and API for tracking DJ performances at Berlin's legend
 
 ## 🏛️ About the Database
 
-This project preserves the history of one of the world's most influential techno venues by cataloging DJ performances at Berghain and Panorama Bar from 2004 to 2009. The database contains:
+This project preserves the history of one of the world's most influential techno venues by cataloging DJ performances at Berghain and Panorama Bar from **November 2009 to September 2025**. The database contains:
 
 - **2,070+ Artists** from around the world
 - **725+ Events** (Klubnacht sessions)
 - **10,137+ Performance records**
-- **Historical flyers** and event documentation
+- **16+ Years** of continuous documentation
 
 ### Database Schema
 
-The database consists of three main tables:
+The database consists of three core tables:
 
 #### Artists
 ```sql
-id              INTEGER PRIMARY KEY
-name            TEXT NOT NULL UNIQUE
-country         TEXT
-genre           TEXT  
-first_appearance DATE
-total_performances INTEGER DEFAULT 0
-created_at      DATETIME DEFAULT CURRENT_TIMESTAMP
+id                     INTEGER PRIMARY KEY AUTOINCREMENT
+name                   TEXT UNIQUE NOT NULL
+normalized_name        TEXT                    -- Normalized for search
+total_performances     INTEGER DEFAULT 0
+berghain_performances  INTEGER DEFAULT 0
+panorama_performances  INTEGER DEFAULT 0
 ```
 
 #### Events
 ```sql
-id          INTEGER PRIMARY KEY
-date        DATE NOT NULL
-venue       TEXT NOT NULL  -- 'Berghain' or 'Panorama Bar'
-event_type  TEXT DEFAULT 'Klubnacht'
-created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
+id            INTEGER PRIMARY KEY AUTOINCREMENT  
+event_id      INTEGER UNIQUE NOT NULL            -- Original Berghain event ID
+title         TEXT NOT NULL                      -- Usually "Klubnacht"
+date          TEXT NOT NULL                      -- DD.MM.YYYY format
+iso_date      TEXT                               -- YYYY-MM-DD format
+year          INTEGER
+month         INTEGER
+url           TEXT NOT NULL                      -- Original event URL
+total_artists INTEGER DEFAULT 0
 ```
 
 #### Performances
 ```sql
-id          INTEGER PRIMARY KEY
-artist_id   INTEGER NOT NULL
-event_id    INTEGER NOT NULL
-venue       TEXT NOT NULL  -- 'Berghain' or 'Panorama Bar'
-time_slot   TEXT           -- e.g., '22:00-04:00'
-created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
+id        INTEGER PRIMARY KEY AUTOINCREMENT
+event_id  INTEGER NOT NULL                    -- References events(id)
+artist_id INTEGER NOT NULL                    -- References artists(id)  
+venue     TEXT NOT NULL                       -- 'Berghain' or 'Panorama Bar'
 ```
 
 ## 🚀 API Documentation
 
 Base URL: `https://berghain.ravers.workers.dev`
 
-### Public Endpoints
+### Core Statistics
 
 #### Database Statistics
 ```http
 GET /api/stats
 ```
 
-Returns overall database statistics including total artists, events, and performances.
+Returns overall database statistics.
 
 **Response:**
 ```json
@@ -75,166 +76,277 @@ Returns overall database statistics including total artists, events, and perform
 }
 ```
 
-#### Artist Rankings
+#### Data Coverage Period
 ```http
-GET /api/artists/ranking
+GET /api/period
 ```
-
-**Query Parameters:**
-- `limit` (optional): Number of results to return (default: 50, max: 200)
-- `venue` (optional): Filter by venue (`berghain` or `panorama`)
-- `year` (optional): Filter by year (2004-2009)
-- `country` (optional): Filter by artist country
 
 **Response:**
 ```json
 {
-  "rankings": [
-    {
-      "rank": 1,
-      "artist_id": 123,
-      "name": "Artist Name",
-      "country": "Germany",
-      "genre": "Techno",
-      "total_performances": 45,
-      "berghain_performances": 25,
-      "panorama_performances": 20,
-      "first_appearance": "2004-09-25"
-    }
-  ],
-  "filters": {
-    "venue": null,
-    "year": null,
-    "country": null,
-    "limit": 50
-  }
+  "start_date": "2009-11-07",
+  "end_date": "2025-09-27"
 }
 ```
-
-#### All Artists
-```http
-GET /api/artists
-```
-
-**Query Parameters:**
-- `search` (optional): Search by artist name
-- `country` (optional): Filter by country
-- `genre` (optional): Filter by genre
-- `limit` (optional): Number of results (default: 100, max: 500)
-- `offset` (optional): Pagination offset (default: 0)
-
-#### Artist Details
-```http
-GET /api/artists/{artistId}
-```
-
-Returns detailed information about a specific artist including all performance history.
-
-#### Events
-```http
-GET /api/events
-```
-
-**Query Parameters:**
-- `year` (optional): Filter by year (2004-2009)
-- `month` (optional): Filter by month (1-12)
-- `venue` (optional): Filter by venue (`berghain` or `panorama`)
-- `limit` (optional): Number of results (default: 50, max: 200)
-- `offset` (optional): Pagination offset
-
-#### Artist Performances
-```http
-GET /api/artists/{artistId}/performances
-```
-
-Returns all performances for a specific artist.
 
 #### Available Years
 ```http
 GET /api/years
 ```
 
-Returns list of available years with event counts.
-
-#### Data Period
-```http
-GET /api/period
+**Response:**
+```json
+[2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009]
 ```
 
-Returns the date range covered by the database.
+### Artist Endpoints
 
-### RSS Feed
+#### Artist Rankings
 ```http
-GET /rss
+GET /api/artists/ranking
 ```
 
-RSS feed of recent database updates and new artist additions.
+Returns artists ranked by performance count (default: top 50).
 
-### Sitemap
-```http
-GET /sitemap.xml
+**Query Parameters:**
+- `limit` (optional): Number of results to return (default: 50)
+
+**Response:**
+```json
+[
+  {
+    "id": 14,
+    "name": "Norman Nodge",
+    "total_performances": 146,
+    "berghain_performances": 139,
+    "panorama_performances": 7
+  },
+  {
+    "id": 16,
+    "name": "Ben Klock",
+    "total_performances": 133,
+    "berghain_performances": 125,
+    "panorama_performances": 8
+  }
+]
 ```
 
-XML sitemap for search engine indexing.
-
-### Health Check
+#### Artist Search & Listing
 ```http
-GET /health
+GET /api/artists
 ```
 
-API health status and performance metrics.
+Search and browse all artists with pagination.
 
-## 📊 Features
+**Query Parameters:**
+- `search` (optional): Search term (supports normalized characters: ¥, Ø, ø, À-ÿ)
+- `page` (optional): Page number (default: 1)
+- `limit` (optional): Results per page (default: 20)
 
-- **Artist Rankings**: Comprehensive rankings by performance count
-- **Venue Comparison**: Berghain vs Panorama Bar statistics  
-- **Historical Timeline**: Events organized by date and venue
-- **Search & Filtering**: Advanced search capabilities
-- **Performance Analytics**: Detailed performance history tracking
-- **Real-time API**: Fast, cached responses with 99.9% uptime
-- **SEO Optimized**: Full sitemap and RSS feed support
+**Response:** Same format as `/api/artists/ranking`
+
+#### Artist by ID
+```http
+GET /api/artists/{artistId}
+```
+
+Get basic artist information.
+
+**Response:**
+```json
+{
+  "id": 16,
+  "name": "Ben Klock",
+  "total_performances": 133,
+  "berghain_performances": 125,
+  "panorama_performances": 8
+}
+```
+
+#### Artist by Name
+```http
+GET /api/artists/by-name/{artistName}
+```
+
+Find artist by exact name match (URL-encoded).
+
+**Example:** `/api/artists/by-name/Ben%20Klock`
+
+#### Artist Statistics
+```http
+GET /api/artists/{artistId}/stats
+```
+
+Get detailed statistics for an artist.
+
+**Response:**
+```json
+{
+  "name": "Ben Klock",
+  "total_performances": 133,
+  "berghain_performances": 125,
+  "panorama_performances": 8,
+  "first_performance": "2009-12-12",
+  "last_performance": "2025-08-30",
+  "active_years": 17,
+  "recent_performances_2years": 18
+}
+```
+
+#### Artist Performance History
+```http
+GET /api/artists/{artistId}/performances
+```
+
+Get all performances for a specific artist.
+
+**Query Parameters:**
+- `limit` (optional): Number of results to return
+
+**Response:**
+```json
+[
+  {
+    "title": "Klubnacht",
+    "date": "30.08.2025",
+    "iso_date": "2025-08-30",
+    "url": "https://www.berghain.berlin/de/event/79230/",
+    "venue": "Panorama Bar",
+    "artist_name": "Ben Klock"
+  }
+]
+```
+
+### Event Endpoints
+
+#### Events Listing
+```http
+GET /api/shows
+```
+
+Browse all Klubnacht events with filtering.
+
+**Query Parameters:**
+- `limit` (optional): Number of results (default: 20)
+
+**Response:**
+```json
+[
+  {
+    "id": 889,
+    "event_id": 79234,
+    "title": "Klubnacht",
+    "date": "27.09.2025",
+    "iso_date": "2025-09-27",
+    "year": 2025,
+    "month": 9,
+    "url": "https://www.berghain.berlin/de/event/79234/",
+    "total_artists": 15,
+    "actual_performances": 15
+  }
+]
+```
+
+### Resident Analysis
+
+#### Current Residents
+```http
+GET /api/residents/current
+```
+
+Returns current active residents based on 3-year performance analysis.
+
+**Response:**
+```json
+[
+  {
+    "id": 36,
+    "name": "Steffi",
+    "total_performances_3y": 30,
+    "recent_performances_1y": 9,
+    "last_performance": "2025-09-27",
+    "total_performances": 121,
+    "berghain_performances": 55,
+    "panorama_performances": 66
+  }
+]
+```
+
+### Monthly Analytics
+
+#### Monthly Statistics
+```http
+GET /api/stats/monthly
+```
+
+Get monthly performance statistics by year.
+
+**Query Parameters:**
+- `year` (optional): Specific year to analyze (default: current year)
+
+**Response:**
+```json
+[
+  {
+    "month": 1,
+    "event_count": 60,
+    "total_artists": 730,
+    "avg_artists_per_event": 12.17
+  }
+]
+```
 
 ## 🌍 Usage Examples
 
-### Get Top 10 Berghain Artists
+### Get Top 10 Artists
 ```bash
-curl "https://berghain.ravers.workers.dev/api/artists/ranking?venue=berghain&limit=10"
+curl "https://berghain.ravers.workers.dev/api/artists/ranking?limit=10"
 ```
 
-### Search for German Techno Artists
+### Search for Artists
 ```bash
-curl "https://berghain.ravers.workers.dev/api/artists?country=Germany&genre=Techno"
-```
+# Search by name
+curl "https://berghain.ravers.workers.dev/api/artists?search=ben+klock"
 
-### Get Events from 2007
-```bash
-curl "https://berghain.ravers.workers.dev/api/events?year=2007"
+# Find exact artist
+curl "https://berghain.ravers.workers.dev/api/artists/by-name/Ben%20Klock"
 ```
 
 ### Get Artist Performance History
 ```bash
-curl "https://berghain.ravers.workers.dev/api/artists/123/performances"
+curl "https://berghain.ravers.workers.dev/api/artists/16/performances"
+```
+
+### Get Current Residents
+```bash
+curl "https://berghain.ravers.workers.dev/api/residents/current"
+```
+
+### Analyze Monthly Trends
+```bash
+curl "https://berghain.ravers.workers.dev/api/stats/monthly?year=2025"
 ```
 
 ## 🔧 Technical Details
 
-- **Infrastructure**: Cloudflare Workers + D1 Database
+- **Infrastructure**: Cloudflare Workers + D1 Database + R2 Storage
 - **Performance**: Edge-cached responses, <100ms average response time
-- **Uptime**: 99.9% availability with global CDN
-- **Rate Limiting**: Fair use policy, no strict limits for public API
+- **Uptime**: 99.9% availability with global CDN distribution
+- **Rate Limiting**: Fair use policy, generous limits for public API
 - **CORS**: Enabled for cross-origin requests
+- **Search**: Advanced normalization supporting special characters (¥, Ø, ø, À-ÿ)
 
 ## 💫 About Berghain
 
 Berghain is arguably the world's most famous techno club, located in a former East Berlin power plant. Known for its:
 
-- Uncompromising techno music programming
-- Strict door policy and no-photos rule  
+- Uncompromising techno music programming  
+- Strict door policy and no-photos rule
 - Industrial atmosphere in a converted power station
-- Two main floors: Berghain (main floor) and Panorama Bar
-- Legendary weekend-long Klubnacht sessions
+- Two main floors: **Berghain** (main floor) and **Panorama Bar**
+- Legendary weekend-long **Klubnacht** sessions
 
-This database preserves the early golden era (2004-2009) when many of today's techno legends established their careers at this iconic venue.
+This database captures **16+ years** of continuous documentation, preserving the legacy of one of techno culture's most important institutions.
 
 ## 🐛 Issues & Feedback
 
@@ -244,7 +356,7 @@ Found a bug? Missing data? Want to suggest a feature?
 
 **Common Issue Types:**
 - 🐛 Bug reports
-- 📊 Data corrections or additions
+- 📊 Data corrections or additions  
 - ✨ Feature requests
 - 📖 Documentation improvements
 - 🤔 General questions
@@ -265,11 +377,10 @@ bc1qp4lg5mw0c9nv3ygjnnx5gg95wk7h6flpw5pvfq
 8oj2PMky2Zx9qznjK5eG7AUdqRab8GnrFJ7UamfEKRu
 ```
 
-
 ### 🌟 Other Ways to Support
 
 - ⭐ Star this repository
-- 🐦 Share on social media
+- 🐦 Share on social media  
 - 📝 Report bugs or suggest improvements
 - 🎵 Visit [berghain.ravers.workers.dev](https://berghain.ravers.workers.dev)
 
@@ -280,8 +391,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - **Berghain & Panorama Bar** - For being an incomparable cultural institution
-- **The Artists** - Who created the music that defined a generation  
-- **Resident Advisor** - Historical event data source
+- **The Artists** - Who created the music that defined a generation
+- **Resident Advisor** - Historical event data source  
 - **Techno Community** - For preserving and celebrating this culture
 
 ---
