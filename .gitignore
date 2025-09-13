@@ -1,0 +1,54 @@
+# Ignore everything by default
+*
+
+# But allow these public documentation files
+!README.md
+!LICENSE
+!.gitignore
+!CONTRIBUTING.md
+!CODE_OF_CONDUCT.md
+!.github/
+!.github/**
+!docs/
+!docs/**
+!examples/
+!examples/**
+
+# Allow issue and PR templates
+!.github/ISSUE_TEMPLATE/
+!.github/ISSUE_TEMPLATE/**
+!.github/PULL_REQUEST_TEMPLATE.md
+
+# Security and project files to ignore
+wrangler.toml
+package.json
+package-lock.json
+node_modules/
+.env
+.env.local
+.wrangler/
+.DS_Store
+*.log
+
+# Source code and private files
+src/
+scripts/
+database/
+csv-for-import/
+ra-*/
+bhflyer*/
+venv/
+*.pdf
+*.txt
+*.png
+*.jpg
+*.ico
+indexnow-key.txt
+
+# IDE and editor files
+.idea/
+.vscode/
+.fleet/
+*.swp
+*.swo
+*~
