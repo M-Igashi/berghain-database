@@ -257,16 +257,14 @@ This project is maintained as a labor of love for the techno community. If you f
 
 **Bitcoin (BTC)**
 ```
-bc1qexampleaddresshere123456789
+bc1qp4lg5mw0c9nv3ygjnnx5gg95wk7h6flpw5pvfq
 ```
 
-**Ethereum (ETH)**  
+**Solana (SOL)**  
 ```
-0xExampleAddressHere123456789
+8oj2PMky2Zx9qznjK5eG7AUdqRab8GnrFJ7UamfEKRu
 ```
 
-**PayPal**
-[paypal.me/example](https://paypal.me/example)
 
 ### 🌟 Other Ways to Support
 
