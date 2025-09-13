@@ -4,7 +4,7 @@ A comprehensive database and API for tracking DJ performances at Berlin's legend
 
 [![Website](https://img.shields.io/badge/Website-berghain.ravers.workers.dev-blue)](https://berghain.ravers.workers.dev)
 [![API Status](https://img.shields.io/badge/API-Live-green)](https://berghain.ravers.workers.dev/health)
-[![Issues](https://img.shields.io/badge/Issues-Welcome-orange)](https://github.com/masanarihigashi/berghain-database/issues)
+[![Issues](https://img.shields.io/badge/Issues-Welcome-orange)](https://github.com/M-Igashi/berghain-database/issues)
 
 ## 🏛️ About the Database
 
@@ -240,7 +240,7 @@ This database preserves the early golden era (2004-2009) when many of today's te
 
 Found a bug? Missing data? Want to suggest a feature?
 
-[**Open an Issue**](https://github.com/masanarihigashi/berghain-database/issues) - We welcome all feedback!
+[**Open an Issue**](https://github.com/M-Igashi/berghain-database/issues) - We welcome all feedback!
 
 **Common Issue Types:**
 - 🐛 Bug reports
