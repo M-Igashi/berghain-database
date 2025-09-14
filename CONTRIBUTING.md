@@ -1,6 +1,6 @@
 # 🤝 Contributing to Berghain Database
 
-Thank you for your interest in contributing to the Berghain Database project! This project is maintained by the techno community, for the community.
+Thank you for your interest in contributing to the Berghain Database project! This project is maintained by the Techno community, for the community.
 
 ## 🎯 How You Can Help
 
@@ -59,7 +59,7 @@ All data corrections must include **credible, verifiable sources**:
    - Resident Advisor event listings (contemporary)
    
 2. **Secondary Sources (Good):**
-   - Contemporary techno magazine articles (from the event period)
+   - Contemporary Techno magazine articles (from the event period)
    - Verified historical documentation
    - Official artist discographies mentioning Berghain performances
    - Music press coverage from the time
@@ -171,7 +171,7 @@ We use these labels to organize issues:
 
 ## 🎵 Community Standards
 
-This project celebrates techno culture and preserves the legacy of one of the world's most important nightclub venues. We expect:
+This project celebrates Techno culture and preserves the legacy of one of the world's most important nightclub venues. We expect:
 
 - **Respect** for all contributors, artists, and community members
 - **Accuracy** in data contributions with proper source verification
@@ -210,7 +210,7 @@ When suggesting data corrections:
 Contributors will be recognized:
 - In release notes for significant data contributions
 - In the project documentation for ongoing contributors
-- With our eternal gratitude for preserving 16+ years of techno history!
+- With our eternal gratitude for preserving 16+ years of Techno history!
 
 Major contributors may be invited to help with database moderation and quality control.
 
@@ -227,12 +227,12 @@ Not sure about something?
 This database represents one of the most comprehensive archives of a single venue's history in electronic music. Contributors help preserve:
 
 - **16+ years** of continuous documentation
-- **2,070+ artists** from the global techno community  
-- **10,137+ performance records** from the world's most legendary techno venue
+- **2,070+ artists** from the global Techno community  
+- **10,137+ performance records** from the world's most legendary Techno venue
 - The cultural legacy of **Berghain's golden era** and its ongoing influence
 
 ---
 
-**Thank you for helping preserve and share the legacy of Berghain and the global techno community!** 🎵
+**Thank you for helping preserve and share the legacy of Berghain and the global Techno community!** 🎵
 
 *Built with ❤️ for ravers, by ravers*

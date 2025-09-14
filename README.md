@@ -8,7 +8,7 @@ A comprehensive database and API for tracking DJ performances at Berlin's legend
 
 ## 🏛️ About the Database
 
-This project preserves the history of one of the world's most influential techno venues by cataloging DJ performances at Berghain and Panorama Bar from **November 2009 to September 2025**. The database contains:
+This project preserves the history of one of the world's most influential Techno venues by cataloging DJ performances at Berghain and Panorama Bar from **November 2009 to September 2025**. The database contains:
 
 - **2,070+ Artists** from around the world
 - **725+ Events** (Klubnacht sessions)
@@ -336,18 +336,6 @@ curl "https://berghain.ravers.workers.dev/api/stats/monthly?year=2025"
 - **CORS**: Enabled for cross-origin requests
 - **Search**: Advanced normalization supporting special characters (¥, Ø, ø, À-ÿ)
 
-## 💫 About Berghain
-
-Berghain is arguably the world's most famous techno club, located in a former East Berlin power plant. Known for its:
-
-- Uncompromising techno music programming  
-- Strict door policy and no-photos rule
-- Industrial atmosphere in a converted power station
-- Two main floors: **Berghain** (main floor) and **Panorama Bar**
-- Legendary weekend-long **Klubnacht** sessions
-
-This database captures **16+ years** of continuous documentation, preserving the legacy of one of techno culture's most important institutions.
-
 ## 🐛 Issues & Feedback
 
 Found a bug? Missing data? Want to suggest a feature?
@@ -363,7 +351,7 @@ Found a bug? Missing data? Want to suggest a feature?
 
 ## 💖 Support This Project
 
-This project is maintained as a labor of love for the techno community. If you find it useful, consider supporting:
+This project is maintained as a labor of love for the Techno community. If you find it useful, consider supporting:
 
 ### 💰 Donations
 
@@ -392,11 +380,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Berghain & Panorama Bar** - For being an incomparable cultural institution
 - **The Artists** - Who created the music that defined a generation
-- **Resident Advisor** - Historical event data source  
 - **Techno Community** - For preserving and celebrating this culture
 
 ---
 
 **Note**: This is an unofficial project created by fans for fans. Not affiliated with Berghain or Ostgut Ton.
 
-*Built with ❤️ for the global techno community*
+*Built with ❤️ for the global Techno community*

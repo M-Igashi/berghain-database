@@ -39,7 +39,7 @@ How important is this feature to you?
 
 ## 🎵 Context
 Any additional context about the feature request, including:
-- How it relates to Berghain/techno culture
+- How it relates to Berghain/Techno culture
 - Similar features in other platforms
 - Technical constraints to consider
 
