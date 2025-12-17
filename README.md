@@ -9,7 +9,7 @@ A comprehensive database and API for tracking DJ performances at Berlin's legend
 
 ## 🏛️ About the Database
 
-This project preserves the history of one of the world's most influential Techno venues by cataloging DJ performances at Berghain and Panorama Bar from **November 2009 to September 2025**. The database contains:
+This project preserves the history of one of the world's most influential Techno venues by cataloging DJ performances at Berghain and Panorama Bar from **November 2009 to Today**. The database contains:
 
 - **2,070+ Artists** from around the world
 - **725+ Events** (Klubnacht sessions)
