@@ -29,10 +29,9 @@
 </p>
 
 <p align="center">
-  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-use-this-database">Use This Database</a> •
+  <a href="#-get-involved">Get Involved</a> •
   <a href="#-api-documentation">API Docs</a> •
-  <a href="#-database-schema">Schema</a> •
-  <a href="#-architecture">Architecture</a> •
   <a href="#-support-this-project">Support</a>
 </p>
 
@@ -49,27 +48,125 @@
 </tr>
 </table>
 
-> **Coverage Period**: November 2009 - February 2026 (ongoing updates)
+> **Coverage Period**: November 2009 - February 2026 (ongoing monthly updates)
 
-This project preserves the history of one of the world's most influential Techno institutions by cataloging every DJ performance at Berghain and Panorama Bar. Updated monthly with the latest Klubnacht lineups.
+This project preserves the history of one of the world's most influential Techno institutions by cataloging every DJ performance at Berghain and Panorama Bar.
 
 ---
 
-## 🚀 Quick Start
+## 🛠️ Use This Database
+
+This database provides a **free public REST API** — no authentication required. Whether you're building an app, conducting research, or exploring data, here's how different users can benefit:
+
+### 👩‍💻 For Developers
+
+Build applications powered by 16+ years of Berghain performance data:
 
 ```bash
-# Get database statistics
-curl https://berghain.ravers.workers.dev/api/stats
+# Get top performers of all time
+curl "https://berghain.ravers.workers.dev/api/artists/ranking?limit=20"
 
-# Search for an artist
-curl "https://berghain.ravers.workers.dev/api/artists?search=ben+klock"
+# Search for any artist
+curl "https://berghain.ravers.workers.dev/api/artists?search=ellen+allien"
 
-# Get top 10 performers
-curl "https://berghain.ravers.workers.dev/api/artists/ranking?limit=10"
+# Get an artist's complete performance history
+curl "https://berghain.ravers.workers.dev/api/artists/16/performances"
 
-# Get current residents
-curl https://berghain.ravers.workers.dev/api/residents/current
+# Fetch current active residents
+curl "https://berghain.ravers.workers.dev/api/residents/current"
 ```
+
+**Example Projects:**
+- DJ performance analytics dashboards
+- Artist career trajectory visualizations
+- Booking frequency analysis tools
+- Historical trends explorer
+- Techno scene network graphs
+
+### 🎓 For Researchers
+
+Study one of the world's most documented club venues:
+
+| Research Area | Relevant Endpoints |
+|--------------|-------------------|
+| Venue programming patterns | `/api/stats/monthly`, `/api/shows` |
+| Artist career analysis | `/api/artists/:id/stats`, `/api/artists/:id/performances` |
+| Resident DJ dynamics | `/api/residents/current` |
+| Historical trends | `/api/years`, `/api/period`, `/api/artists/ranking/year/:year` |
+
+**Academic Use Cases:**
+- Club culture and nightlife studies
+- Electronic music history documentation
+- Social network analysis of DJ communities
+- Urban cultural institution research
+- Gender and diversity analysis in DJ bookings
+
+### 🎧 For Fans & Enthusiasts
+
+Explore the complete Berghain archive:
+
+- **Discover** which DJs have played the most sets
+- **Track** your favorite artists' performance history
+- **Compare** Berghain vs Panorama Bar bookings
+- **Find** when artists first/last played
+- **Explore** monthly and yearly programming patterns
+
+---
+
+## 🤝 Get Involved
+
+This database is maintained by the community, for the community. Your contributions help preserve Techno history.
+
+<p align="center">
+  <a href="https://github.com/M-Igashi/berghain-database/issues/new?template=data_correction.md">
+    <img src="https://img.shields.io/badge/📊_Report_Missing_Data-blue?style=for-the-badge" alt="Report Missing Data">
+  </a>
+  <a href="https://github.com/M-Igashi/berghain-database/issues/new?template=bug_report.md">
+    <img src="https://img.shields.io/badge/🐛_Report_Bug-red?style=for-the-badge" alt="Report Bug">
+  </a>
+  <a href="https://github.com/M-Igashi/berghain-database/issues/new?template=feature_request.md">
+    <img src="https://img.shields.io/badge/✨_Request_Feature-green?style=for-the-badge" alt="Request Feature">
+  </a>
+</p>
+
+### How You Can Help
+
+| Contribution | Description |
+|-------------|-------------|
+| 🔍 **Data Corrections** | Found a wrong date, misspelled artist, or incorrect venue? Let us know! |
+| ➕ **Missing Performances** | Know about a performance that's not in the database? Report it with source |
+| 💡 **Feature Ideas** | Have an idea for a new API endpoint or analysis? We'd love to hear it |
+| ⭐ **Star & Share** | Help others discover this project |
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on submitting corrections with proper sources.
+
+---
+
+## 💖 Support This Project
+
+This database is a labor of love, maintained for the global Techno community. If you find it useful:
+
+<table>
+<tr>
+<td align="center">
+<strong>Bitcoin (BTC)</strong><br>
+<img src="https://berghain.ravers.workers.dev/qr/bitcoin.png" width="120"><br>
+<code style="font-size: 10px;">bc1qp4lg5mw0c9nv3ygjnnx5gg95wk7h6flpw5pvfq</code>
+</td>
+<td align="center">
+<strong>Solana (SOL)</strong><br>
+<img src="https://berghain.ravers.workers.dev/qr/solana.png" width="120"><br>
+<code style="font-size: 10px;">8oj2PMky2Zx9qznjK5eG7AUdqRab8GnrFJ7UamfEKRu</code>
+</td>
+<td align="center">
+<strong>Other Ways</strong><br><br>
+⭐ Star this repo<br>
+🐦 Share on social<br>
+📝 Report issues<br>
+🔗 Link to us
+</td>
+</tr>
+</table>
 
 ---
 
@@ -77,7 +174,23 @@ curl https://berghain.ravers.workers.dev/api/residents/current
 
 **Base URL**: `https://berghain.ravers.workers.dev`
 
-### Core Statistics
+### Quick Reference
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/stats` | Database statistics & venue breakdown |
+| `GET /api/artists/ranking` | Top artists by performance count |
+| `GET /api/artists?search=` | Search artists by name |
+| `GET /api/artists/:id` | Get artist details |
+| `GET /api/artists/:id/stats` | Detailed artist statistics |
+| `GET /api/artists/:id/performances` | Artist's performance history |
+| `GET /api/shows` | Browse all events |
+| `GET /api/residents/current` | Current active residents |
+| `GET /api/years` | Available years in database |
+| `GET /api/period` | Data coverage period |
+| `GET /api/stats/monthly?year=` | Monthly statistics by year |
+
+### Detailed Endpoints
 
 <details>
 <summary><code>GET /api/stats</code> — Database Statistics</summary>
@@ -99,29 +212,6 @@ Returns overall database statistics including total counts and venue breakdown.
 </details>
 
 <details>
-<summary><code>GET /api/period</code> — Data Coverage Period</summary>
-
-**Response:**
-```json
-{
-  "start_date": "2009-11-07",
-  "end_date": "2026-02-28"
-}
-```
-</details>
-
-<details>
-<summary><code>GET /api/years</code> — Available Years</summary>
-
-**Response:**
-```json
-[2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009]
-```
-</details>
-
-### Artist Endpoints
-
-<details>
 <summary><code>GET /api/artists/ranking</code> — Artist Rankings</summary>
 
 Returns artists ranked by total performance count.
@@ -140,37 +230,20 @@ Returns artists ranked by total performance count.
     "total_performances": 149,
     "berghain_performances": 142,
     "panorama_performances": 7
-  },
-  {
-    "id": 16,
-    "name": "Ben Klock",
-    "total_performances": 138,
-    "berghain_performances": 130,
-    "panorama_performances": 8
   }
 ]
 ```
 </details>
 
 <details>
-<summary><code>GET /api/artists/ranking/year/:year</code> — Yearly Rankings</summary>
-
-Returns artist rankings for a specific year.
-
-**Example:** `/api/artists/ranking/year/2024`
-
-**Response:** Same format as `/api/artists/ranking`
-</details>
-
-<details>
-<summary><code>GET /api/artists</code> — Search & Browse Artists</summary>
+<summary><code>GET /api/artists</code> — Search Artists</summary>
 
 Search and browse all artists with pagination.
 
 **Query Parameters:**
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `search` | string | — | Search term (supports special chars: ¥, Ø, ø, À-ÿ) |
+| `search` | string | — | Search term (supports special chars: Ø, ø, À-ÿ) |
 | `page` | integer | 1 | Page number |
 | `limit` | integer | 20 | Results per page |
 
@@ -181,32 +254,7 @@ curl "https://berghain.ravers.workers.dev/api/artists?search=rødhåd"
 </details>
 
 <details>
-<summary><code>GET /api/artists/:artistId</code> — Artist by ID</summary>
-
-Get basic artist information by database ID.
-
-**Response:**
-```json
-{
-  "id": 16,
-  "name": "Ben Klock",
-  "total_performances": 138,
-  "berghain_performances": 130,
-  "panorama_performances": 8
-}
-```
-</details>
-
-<details>
-<summary><code>GET /api/artists/by-name/:artistName</code> — Artist by Name</summary>
-
-Find artist by exact name match (URL-encoded).
-
-**Example:** `/api/artists/by-name/Ben%20Klock`
-</details>
-
-<details>
-<summary><code>GET /api/artists/:artistId/stats</code> — Artist Statistics</summary>
+<summary><code>GET /api/artists/:id/stats</code> — Artist Statistics</summary>
 
 Get detailed statistics for an artist including career span.
 
@@ -226,14 +274,9 @@ Get detailed statistics for an artist including career span.
 </details>
 
 <details>
-<summary><code>GET /api/artists/:artistId/performances</code> — Performance History</summary>
+<summary><code>GET /api/artists/:id/performances</code> — Performance History</summary>
 
 Get all performances for a specific artist.
-
-**Query Parameters:**
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `limit` | integer | — | Maximum results to return |
 
 **Response:**
 ```json
@@ -249,39 +292,6 @@ Get all performances for a specific artist.
 ]
 ```
 </details>
-
-### Event Endpoints
-
-<details>
-<summary><code>GET /api/shows</code> — Browse Events</summary>
-
-Browse all Klubnacht events with filtering.
-
-**Query Parameters:**
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `limit` | integer | 20 | Number of results |
-
-**Response:**
-```json
-[
-  {
-    "id": 912,
-    "event_id": 79500,
-    "title": "Klubnacht",
-    "date": "28.02.2026",
-    "iso_date": "2026-02-28",
-    "year": 2026,
-    "month": 2,
-    "url": "https://www.berghain.berlin/de/event/79500/",
-    "total_artists": 14,
-    "actual_performances": 14
-  }
-]
-```
-</details>
-
-### Resident Analysis
 
 <details>
 <summary><code>GET /api/residents/current</code> — Current Residents</summary>
@@ -305,7 +315,33 @@ Returns current active residents based on 3-year rolling performance analysis.
 ```
 </details>
 
-### Analytics
+<details>
+<summary><code>GET /api/shows</code> — Browse Events</summary>
+
+Browse all Klubnacht events.
+
+**Query Parameters:**
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `limit` | integer | 20 | Number of results |
+
+**Response:**
+```json
+[
+  {
+    "id": 912,
+    "event_id": 79500,
+    "title": "Klubnacht",
+    "date": "28.02.2026",
+    "iso_date": "2026-02-28",
+    "year": 2026,
+    "month": 2,
+    "url": "https://www.berghain.berlin/de/event/79500/",
+    "total_artists": 14
+  }
+]
+```
+</details>
 
 <details>
 <summary><code>GET /api/stats/monthly</code> — Monthly Statistics</summary>
@@ -330,20 +366,47 @@ Get monthly performance statistics aggregated by year.
 ```
 </details>
 
-### Feeds & SEO
+### Additional Endpoints
 
 | Endpoint | Description |
 |----------|-------------|
+| `GET /api/artists/by-name/:name` | Find artist by exact name (URL-encoded) |
+| `GET /api/artists/ranking/year/:year` | Rankings for a specific year |
 | `GET /sitemap.xml` | XML sitemap for search engines |
 | `GET /feed.xml` | RSS feed of recent events |
-| `GET /robots.txt` | Robots exclusion protocol |
-| `GET /health` | API health check endpoint |
+| `GET /health` | API health check |
+
+### API Features
+
+- **CORS enabled** — Works from any origin
+- **No authentication** — Completely free and open
+- **Generous rate limits** — Fair use policy
+- **Fast responses** — <100ms average (95%+ cache hit rate)
+- **ISO dates** — Machine-readable date formats
+- **Special character support** — Handles Ø, ø, À-ÿ, etc.
 
 ---
 
 ## 🗄️ Database Schema
 
-The database uses SQLite (Cloudflare D1) with three core tables:
+SQLite database (Cloudflare D1) with three core tables:
+
+```
+┌─────────────────┐       ┌──────────────────┐       ┌─────────────────┐
+│     artists     │       │   performances   │       │     events      │
+├─────────────────┤       ├──────────────────┤       ├─────────────────┤
+│ id (PK)         │◄──────│ artist_id (FK)   │       │ id (PK)         │
+│ name            │       │ event_id (FK)    │──────►│ event_id        │
+│ normalized_name │       │ venue            │       │ title           │
+│ total_perfs     │       └──────────────────┘       │ date / iso_date │
+│ berghain_perfs  │                                  │ year / month    │
+│ panorama_perfs  │                                  │ url             │
+└─────────────────┘                                  │ total_artists   │
+                                                     └─────────────────┘
+```
+
+<details>
+<summary>View detailed schema</summary>
 
 ### `artists`
 | Column | Type | Description |
@@ -376,25 +439,14 @@ The database uses SQLite (Cloudflare D1) with three core tables:
 | `artist_id` | INTEGER | References `artists(id)` |
 | `venue` | TEXT | "Berghain" or "Panorama Bar" |
 
-### Entity Relationship
-
-```
-┌─────────────┐       ┌──────────────────┐       ┌─────────────┐
-│   artists   │       │   performances   │       │   events    │
-├─────────────┤       ├──────────────────┤       ├─────────────┤
-│ id (PK)     │◄──────│ artist_id (FK)   │       │ id (PK)     │
-│ name        │       │ event_id (FK)    │──────►│ event_id    │
-│ normalized  │       │ venue            │       │ title       │
-│ total_perf  │       │                  │       │ date        │
-│ berghain    │       └──────────────────┘       │ iso_date    │
-│ panorama    │                                  │ year/month  │
-└─────────────┘                                  │ url         │
-                                                 └─────────────┘
-```
+</details>
 
 ---
 
 ## 🏗️ Architecture
+
+<details>
+<summary>View technical architecture</summary>
 
 Built on Cloudflare's global edge network for maximum performance and reliability.
 
@@ -423,162 +475,50 @@ Built on Cloudflare's global edge network for maximum performance and reliabilit
 │                  ▼                           ▼                  │
 │  ┌───────────────────────────┐  ┌───────────────────────────┐  │
 │  │   3-Tier Cache System     │  │      R2 Storage           │  │
-│  │ ┌───────────────────────┐ │  │  (Static Assets)          │  │
-│  │ │  In-Memory (L1)       │ │  └───────────────────────────┘  │
-│  │ │  - Per-instance       │ │                                 │
-│  │ │  - 2-24h TTL          │ │                                 │
-│  │ └───────────────────────┘ │                                 │
-│  │ ┌───────────────────────┐ │                                 │
-│  │ │  KV Storage (L2)      │ │                                 │
-│  │ │  - Global, persistent │ │                                 │
-│  │ │  - 7-30 day TTL       │ │                                 │
-│  │ └───────────────────────┘ │                                 │
-│  │ ┌───────────────────────┐ │                                 │
-│  │ │  D1 Database (L3)     │ │                                 │
-│  │ │  - Source of truth    │ │                                 │
-│  │ │  - SQLite at edge     │ │                                 │
-│  │ └───────────────────────┘ │                                 │
+│  │                           │  │  (Static Assets)          │  │
+│  │  L1: In-Memory (2-24h)    │  └───────────────────────────┘  │
+│  │  L2: KV Storage (7-30d)   │                                 │
+│  │  L3: D1 Database          │                                 │
 │  └───────────────────────────┘                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ### 3-Tier Cache System
 
-The API implements an advanced caching strategy that reduces D1 database reads by **~95%**:
+The API implements an advanced caching strategy that reduces database reads by **~95%**:
 
-| Layer | Storage | Scope | TTL | Use Case |
-|-------|---------|-------|-----|----------|
-| **L1** | In-Memory Map | Per-instance | 2-24h | Ultra-fast repeated requests |
-| **L2** | Workers KV | Global | 7-30 days | Cross-instance cache sharing |
-| **L3** | D1 Database | Global | Permanent | Source of truth |
-
-**Cache Flow:**
-```
-Request → L1 Hit? → Return
-              ↓ Miss
-         L2 Hit? → Populate L1 → Return
-              ↓ Miss
-         D1 Query → Populate L1 + L2 → Return
-```
-
-### Performance Characteristics
-
-| Metric | Value |
-|--------|-------|
-| **Average Response Time** | <100ms |
-| **Cache Hit Rate** | >95% |
-| **Global Availability** | 99.9%+ |
-| **Edge Locations** | 300+ cities |
+| Layer | Storage | Scope | TTL |
+|-------|---------|-------|-----|
+| **L1** | In-Memory Map | Per-instance | 2-24h |
+| **L2** | Workers KV | Global | 7-30 days |
+| **L3** | D1 Database | Global | Permanent |
 
 ### Key Technologies
 
-| Component | Technology | Purpose |
-|-----------|------------|---------|
-| Runtime | Cloudflare Workers | Serverless edge computing |
-| Framework | Hono | Lightweight, TypeScript-first |
-| Database | Cloudflare D1 | Edge SQLite database |
-| Cache | Workers KV | Global key-value storage |
-| Storage | Cloudflare R2 | Static asset hosting |
-| Language | TypeScript | Type-safe development |
+| Component | Technology |
+|-----------|------------|
+| Runtime | Cloudflare Workers |
+| Framework | Hono (TypeScript) |
+| Database | Cloudflare D1 (SQLite) |
+| Cache | Workers KV |
+| Storage | Cloudflare R2 |
 
----
+### Performance
 
-## 🔧 Technical Features
+| Metric | Value |
+|--------|-------|
+| Average Response Time | <100ms |
+| Cache Hit Rate | >95% |
+| Global Availability | 99.9%+ |
+| Edge Locations | 300+ cities |
 
-### Search Capabilities
-- **Normalized search**: Handles special characters (¥, Ø, ø, À-ÿ, etc.)
-- **Case-insensitive**: "Ben Klock" = "ben klock"
-- **Partial matching**: Search substrings of artist names
-
-### API Features
-- **CORS enabled**: Works from any origin
-- **Rate limiting**: Generous fair-use policy
-- **Pagination**: Standard `page` and `limit` parameters
-- **ISO dates**: Machine-readable date formats
-
-### SEO & Discoverability
-- **Dynamic sitemap**: Updated automatically with new events
-- **RSS feed**: Subscribe to latest Klubnacht lineups
-- **IndexNow integration**: Instant search engine indexing
-- **Structured data**: JSON-LD schema markup
-
----
-
-## 📈 Use Cases
-
-### For Developers
-- Build Techno music applications and visualizations
-- Analyze DJ performance patterns and trends
-- Create booking insights tools
-- Research electronic music history
-
-### For Researchers
-- Study venue programming patterns over 16+ years
-- Analyze artist career trajectories
-- Document the evolution of Berlin's Techno scene
-- Academic research on club culture
-
-### For Fans
-- Discover which DJs have played Berghain/Panorama Bar
-- Track favorite artists' performance history
-- Explore the venue's complete lineup archive
-- Plan visits based on resident DJ patterns
-
----
-
-## 🐛 Issues & Contributions
-
-Found a bug? Missing data? Want to suggest a feature?
-
-<p align="center">
-  <a href="https://github.com/M-Igashi/berghain-database/issues/new?template=bug_report.md">
-    <img src="https://img.shields.io/badge/🐛_Report_Bug-red?style=for-the-badge" alt="Report Bug">
-  </a>
-  <a href="https://github.com/M-Igashi/berghain-database/issues/new?template=data_correction.md">
-    <img src="https://img.shields.io/badge/📊_Data_Correction-blue?style=for-the-badge" alt="Data Correction">
-  </a>
-  <a href="https://github.com/M-Igashi/berghain-database/issues/new?template=feature_request.md">
-    <img src="https://img.shields.io/badge/✨_Feature_Request-green?style=for-the-badge" alt="Feature Request">
-  </a>
-</p>
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
-
----
-
-## 💖 Support This Project
-
-This database is maintained as a labor of love for the Techno community. If you find it useful, consider supporting:
-
-### Donate
-
-<table>
-<tr>
-<td align="center">
-<strong>Bitcoin (BTC)</strong><br>
-<img src="https://berghain.ravers.workers.dev/qr/bitcoin.png" width="150"><br>
-<code>bc1qp4lg5mw0c9nv3ygjnnx5gg95wk7h6flpw5pvfq</code>
-</td>
-<td align="center">
-<strong>Solana (SOL)</strong><br>
-<img src="https://berghain.ravers.workers.dev/qr/solana.png" width="150"><br>
-<code>8oj2PMky2Zx9qznjK5eG7AUdqRab8GnrFJ7UamfEKRu</code>
-</td>
-</tr>
-</table>
-
-### Other Ways to Support
-
-- ⭐ **Star this repository** — helps others discover the project
-- 🐦 **Share on social media** — spread the word
-- 📝 **Report issues** — help improve data quality
-- 🔗 **Link to us** — mention the database in your projects
+</details>
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 
@@ -586,13 +526,12 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 - **Berghain & Panorama Bar** — For being an incomparable cultural institution
 - **The Artists** — Who created the music that defined a generation
-- **Techno Community** — For preserving and celebrating this culture
+- **The Community** — For preserving and celebrating Techno culture
 
 ---
 
 <p align="center">
-  <strong>Note</strong>: This is an unofficial project created by fans for fans.<br>
-  Not affiliated with Berghain or Ostgut Ton.
+  <strong>Note</strong>: This is an unofficial community project. Not affiliated with Berghain or Ostgut Ton.
 </p>
 
 <p align="center">
