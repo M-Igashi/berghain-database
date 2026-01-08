@@ -1,8 +1,4 @@
-<p align="center">
-  <img src="https://berghain.ravers.workers.dev/favicon.png" alt="Berghain Database Logo" width="120">
-</p>
-
-<h1 align="center">🎵 Berghain Klubnacht Database</h1>
+<h1 align="center">Berghain Klubnacht Database</h1>
 
 <p align="center">
   <strong>The most comprehensive historical archive of DJ performances at Berlin's legendary Berghain nightclub</strong>
@@ -103,7 +99,7 @@ Study one of the world's most documented club venues:
 
 ### 🎧 For Fans & Enthusiasts
 
-Explore the complete Berghain archive:
+Simply visit [the web front end](https://berghain.ravers.workers.dev) and explore the complete Berghain archive:
 
 - **Discover** which DJs have played the most sets
 - **Track** your favorite artists' performance history
