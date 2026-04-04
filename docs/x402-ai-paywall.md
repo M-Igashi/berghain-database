@@ -84,21 +84,45 @@ const data = await response.json();
 
 ## Detected AI Crawlers
 
-The following AI crawlers are detected and subject to x402 pricing:
+Over 80 AI crawlers are detected and subject to x402 pricing:
 
-**OpenAI / Microsoft**: GPTBot, ChatGPT-User, OAI-SearchBot
+**OpenAI / Microsoft**: GPTBot, ChatGPT-User, ChatGPT-Agent, OAI-SearchBot, Operator
 
-**Anthropic**: ClaudeBot, Claude-Web, anthropic-ai
+**Anthropic**: ClaudeBot, Claude-Web, Claude-SearchBot, Claude-User, anthropic-ai
 
-**Google**: Google-Extended, GoogleOther, GoogleOther-Image, Google-CloudVertexBot
+**Google**: Google-Extended, GoogleOther, GoogleOther-Image, Google-CloudVertexBot, Google-Agent, Gemini-Deep-Research, Google-NotebookLM
 
-**Meta**: Meta-ExternalAgent, FacebookBot
+**Amazon / AWS**: Amazonbot, bedrockbot, NovaAct
 
-**Other Major**: Amazonbot, Applebot-Extended, PerplexityBot, Bytespider (TikTok), Cloudflare-AI-Search
+**Meta**: Meta-ExternalAgent, FacebookBot, Manus-User
 
-**Data / Research**: CCBot (Common Crawl), Diffbot, cohere-ai, YouBot, AI2Bot, webz.io, Timpibot, ImagesiftBot
+**Apple**: Applebot-Extended
 
-**Chinese Search / AI**: Sogou, Baidu-Spider-AI, TencentBot, 360Spider, YisouSpider
+**xAI**: GrokBot
+
+**Mistral**: MistralAI-User
+
+**DeepSeek**: DeepSeekBot
+
+**Perplexity**: PerplexityBot, Perplexity-User
+
+**Cloudflare**: Cloudflare-AI-Search, Cloudflare-AutoRAG
+
+**AI Search**: DuckAssistBot, Bravebot, PhindBot, ExaBot, TavilyBot, iaskspider, Andibot, kagi-fetcher, LinerBot, Anomura
+
+**AI Agents / Tools**: Devin, FirecrawlAgent, Crawl4AI, ApifyBot
+
+**ByteDance**: Bytespider, TikTokSpider
+
+**Chinese AI**: ChatGLM-Spider, Sogou, Baidu-Spider-AI, TencentBot, 360Spider, YisouSpider
+
+**Huawei**: PetalBot
+
+**Korean / Japanese AI**: WRTNBot, SBIntuitionsBot
+
+**Data / Training**: CCBot (Common Crawl), Diffbot, cohere-ai, webz.io, Brightbot
+
+**Others**: YouBot, AI2Bot, Timpibot, ImagesiftBot, QualifiedBot, KlaviyoAIBot
 
 > Human browsers and traditional search engine crawlers (Googlebot, bingbot, etc.) are **not** affected. They access all content for free.
 

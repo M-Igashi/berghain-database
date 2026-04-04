@@ -97,7 +97,7 @@ Request → detectCrawler(User-Agent)
 | Artist details | $0.02 |
 | Bulk exports | $0.10 |
 
-30+ AI crawlers are detected including GPTBot, ClaudeBot, Google-Extended, Amazonbot, and more. All crawler activity and payment data is tracked via Cloudflare Analytics Engine and displayed on the [public transparency dashboard](https://berghain.ravers.workers.dev/dashboard/crawl-stats).
+80+ AI crawlers are detected including GPTBot, ChatGPT-Agent, ClaudeBot, Google-Agent, DeepSeekBot, GrokBot, Amazonbot, and more. All crawler activity and payment data is tracked via Cloudflare Analytics Engine and displayed on the [public transparency dashboard](https://berghain.ravers.workers.dev/dashboard/crawl-stats).
 
 See [docs/x402-ai-paywall.md](docs/x402-ai-paywall.md) for details.
 
