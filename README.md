@@ -31,7 +31,8 @@ This project preserves the history of one of the world's most influential Techno
 | Database | Cloudflare D1 (SQLite) |
 | Cache | Workers KV (3-tier: Memory → KV → D1) |
 | Storage | Cloudflare R2 |
-| AI Paywall | [x402 protocol](https://x402.org) (USDC on Solana) |
+| Analytics | Cloudflare Analytics Engine (crawl stats & revenue tracking) |
+| AI Paywall | [x402 protocol](https://x402.org) — USDC on Solana mainnet via [Coinbase CDP](https://docs.cdp.coinbase.com/) facilitator |
 
 ## Documentation
 
@@ -82,7 +83,7 @@ All HTML pages support `Accept: text/markdown` for structured markdown responses
 
 ## x402 AI Paywall
 
-AI crawlers are detected by User-Agent and required to pay via the [x402 protocol](https://x402.org) (USDC on Solana). Human users and search engine bots access everything for free.
+AI crawlers are detected by User-Agent and required to pay via the [x402 protocol](https://x402.org). Payments are processed in **USDC on Solana mainnet** through the [Coinbase Developer Platform (CDP)](https://docs.cdp.coinbase.com/) facilitator. Human users and search engine bots access everything for free.
 
 ```
 Request → detectCrawler(User-Agent)
@@ -96,7 +97,9 @@ Request → detectCrawler(User-Agent)
 | Artist details | $0.02 |
 | Bulk exports | $0.10 |
 
-30+ AI crawlers are detected including GPTBot, ClaudeBot, Google-Extended, Amazonbot, and more. See [docs/x402-ai-paywall.md](docs/x402-ai-paywall.md) for details.
+30+ AI crawlers are detected including GPTBot, ClaudeBot, Google-Extended, Amazonbot, and more. All crawler activity and payment data is tracked via Cloudflare Analytics Engine and displayed on the [public transparency dashboard](https://berghain.ravers.workers.dev/dashboard/crawl-stats).
+
+See [docs/x402-ai-paywall.md](docs/x402-ai-paywall.md) for details.
 
 ## Get Involved
 

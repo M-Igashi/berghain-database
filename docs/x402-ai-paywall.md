@@ -54,10 +54,12 @@ These endpoints are always free, regardless of User-Agent:
 | Setting | Value |
 | --- | --- |
 | Protocol | [x402](https://x402.org) |
-| Network | Solana |
-| Currency | USDC |
-| Facilitator | `https://x402.org/facilitator` |
+| Network | Solana mainnet |
+| Currency | USDC (`EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v`) |
+| Facilitator | [Coinbase CDP](https://docs.cdp.coinbase.com/) (`https://api.cdp.coinbase.com/platform/v2/x402`) |
 | Wallet | `8oj2PMky2Zx9qznjK5eG7AUdqRab8GnrFJ7UamfEKRu` |
+
+Payment verification and settlement are handled by the Coinbase Developer Platform (CDP) facilitator. The server generates ES256 JWTs for authenticating with the CDP API, which verifies on-chain USDC transactions on Solana mainnet.
 
 ## Using x402 as a Client
 
@@ -100,17 +102,27 @@ The following AI crawlers are detected and subject to x402 pricing:
 
 > Human browsers and traditional search engine crawlers (Googlebot, bingbot, etc.) are **not** affected. They access all content for free.
 
-## Crawl Statistics
+## Crawl Statistics & Revenue Tracking
+
+All AI crawler activity is tracked via **Cloudflare Analytics Engine**, providing real-time analytics without impacting request performance.
+
+Each crawl event records:
+- Crawler identity (User-Agent)
+- Requested path
+- Event type (request or paid)
+- Payment amount (for successful x402 transactions)
 
 ### Public API
 
-`GET /api/public/crawl-summary?days=N` returns aggregated crawler statistics (max 90 days). No authentication required.
+`GET /api/public/crawl-summary?days=N` returns aggregated crawler statistics including per-crawler revenue (max 90 days). No authentication required.
 
 ### Dashboard
 
 A visual dashboard is available at [`/dashboard/crawl-stats`](https://berghain.ravers.workers.dev/dashboard/crawl-stats) showing:
 
 - Daily crawler request volume (paid vs. blocked)
-- Crawler rankings by request count
+- Daily revenue chart (USDC)
+- Per-crawler revenue breakdown
+- Crawler rankings by request count and payment status
 - Most accessed paths
-- 30-day trend charts
+- 30/90-day trend views
