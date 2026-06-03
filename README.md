@@ -42,6 +42,7 @@ This project preserves the history of one of the world's most influential Techno
 | [Architecture](docs/architecture.md) | System design, caching strategy, and performance |
 | [x402 AI Paywall](docs/x402-ai-paywall.md) | How AI crawlers are monetized via x402 |
 | [Database Schema](docs/schema.md) | Table definitions and relationships |
+| [Aliases & Collective Acts](docs/aliases-and-units.md) | How DJ aliases (`aka`) and duo/collective members are represented |
 
 ## API Overview
 
