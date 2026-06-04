@@ -32,6 +32,7 @@ The **primary** is the better-known / more-played name. Aliases that have *no* s
 | **Daniel Bell aka DBX** | Detroit minimal-techno pioneer |
 | **Shed aka Head High aka EQD** | René Pawlowitz — three of his aliases in the data |
 | **Planetary Assault Systems aka Luke Slater aka L.B. Dub Corp** | Luke Slater's main techno aliases |
+| **Soundstream aka Soundhack** | Both are aliases of Frank Timm |
 
 ### Intentionally kept separate
 
