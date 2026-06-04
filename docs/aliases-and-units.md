@@ -63,6 +63,7 @@ Groups whose members have **no** solo history in the data (e.g. **Âme**, **Tale
 | **Overmono** | Truss (Tom Russell) · Tessela (Ed Russell) |
 | **Lakker** | Eomac (Ian McDonnell) · Dara Smith |
 | **Minilogue** | Sebastian Mullaert · Marcus Henriksson |
+| **Doms & Deykers** | Steffi (Steffie Doms) · Martyn (Martijn Deykers) |
 
 ---
 
@@ -94,12 +95,13 @@ Cryptic act names where we cannot yet identify the members. If at least one memb
 | **O/V/R** | 2011–2017, Berghain (4) | Established techno project — members? |
 | **I/Y** | 2013–2016, Berghain (4) | Members? |
 | **A&S** | 2013, 2015, 2018, Berghain (3) | Played *9 Jahre Berghain* and *Ostgut Ton Nacht* — likely an Ostgut-affiliated duo |
-| **Doms & Deykers** | 2016, Panorama Bar — *Ostgut Ton Nacht* (1) | Is "Deykers" = Martyn (Martijn Deijkers)? |
 | **CW/A** | 2017, Berghain (1) | Members? |
 | **He/aT** | 2014, Berghain (1) | Members? |
 | **M>O>S** | 2016, Panorama Bar (1) | Members? |
 | **∑ (Summe)** | 2016, Berghain (1) | Who? |
 | **Shawn O'Sullivan cluster** | 400PPM (3) · Civil Duty (1) · An-i (1) | How do **400PPM**, **Civil Duty** and **An-i** relate to each other and to Shawn O'Sullivan? |
+
+> ✅ **Recently solved by the community:** *Doms & Deykers* = **Steffi** (Steffie Doms) + **Martyn** (Martijn Deykers) — now credited above. Thanks r/Berghain_Community! 🙏
 
 ---
 
