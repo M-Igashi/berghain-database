@@ -94,9 +94,6 @@ Cryptic act names where we cannot yet identify the members. If at least one memb
 | Act | Appearances | What we know |
 | --- | --- | --- |
 | **I/Y** | 2013–2016, Berghain (4) | = **Irakli & Yacoub** (community) — neither has solo history here, so kept as a single act |
-| **He/aT** | 2014, Berghain (1) | Members? |
-| **M>O>S** | 2016, Panorama Bar (1) | Members? |
-| **∑ (Summe)** | 2016, Berghain (1) | Who? |
 | **Shawn O'Sullivan cluster** | 400PPM (3) · Civil Duty (1) · An-i (1) | How do **400PPM**, **Civil Duty** and **An-i** relate to each other and to Shawn O'Sullivan? |
 
 > ✅ **Recently solved by the community** (thanks r/Berghain_Community! 🙏):
@@ -104,6 +101,9 @@ Cryptic act names where we cannot yet identify the members. If at least one memb
 > - *O/V/R* = **James Ruskin** + **Regis** · *A&S* = **Dimi Angélis** + **Jeroen Search** · *CW/A* = **Clockwork** + **Avatism** — all now credited above
 > - *I/Y* identified as **Irakli & Yacoub** (kept whole — neither has solo history here)
 > - **Vera ≠ Vera Logdanidi** (German vs Ukrainian DJ) and **Philippa ≠ Philippa Pacho** confirmed as **different** people — kept separate
+> - *He/aT* = **Chris Finke** (former name of the UK producer; also Bodyjack) — solo act, kept as-is
+> - *∑ (Summe)* = solo project of producer **Frieder Blume** (now **Struktur**) — not a duo, kept as-is
+> - *M>O>S* is a **label** (M>O>S Recordings), not an artist — kept as-is
 
 ---
 
