@@ -64,6 +64,9 @@ Groups whose members have **no** solo history in the data (e.g. **Âme**, **Tale
 | **Lakker** | Eomac (Ian McDonnell) · Dara Smith |
 | **Minilogue** | Sebastian Mullaert · Marcus Henriksson |
 | **Doms & Deykers** | Steffi (Steffie Doms) · Martyn (Martijn Deykers) |
+| **O/V/R** | James Ruskin · Regis |
+| **A&S** | Dimi Angélis · Jeroen Search |
+| **CW/A** | Clockwork · Avatism |
 
 ---
 
@@ -77,8 +80,6 @@ Possible duplicates that have **not** been merged. Years and venues are shown to
 
 | Entry A | Entry B | Our current guess |
 | --- | --- | --- |
-| **Vera** — 2025–2026, Panorama Bar (3) | **Vera Logdanidi** — 2022–2026, BGHN + PBar (5) | Likely the same DJ billed two ways — **needs confirmation** |
-| **Philippa** — 2024, Panorama Bar (2) | **Philippa Pacho** — 2022–2024, Berghain (18) | "Philippa" may be a short billing of Philippa Pacho — **needs confirmation** |
 | **Stephan Hill** — 2010, Panorama Bar (1) | **Stefan Hill** — 2013, Panorama Bar (1) | Possible spelling variant — unconfirmed |
 | **Thomas Svensson** — 2014, Panorama Bar (1) | **Tomas Svensson** — 2013, Panorama Bar (1) | Possible spelling variant — unconfirmed |
 | **Talisman** — 2019, Berghain (1) | **Talismann** — 2014 & 2023, Berghain (2) | Could be the same act or two different ones |
@@ -92,16 +93,17 @@ Cryptic act names where we cannot yet identify the members. If at least one memb
 
 | Act | Appearances | What we know |
 | --- | --- | --- |
-| **O/V/R** | 2011–2017, Berghain (4) | Established techno project — members? |
-| **I/Y** | 2013–2016, Berghain (4) | Members? |
-| **A&S** | 2013, 2015, 2018, Berghain (3) | Played *9 Jahre Berghain* and *Ostgut Ton Nacht* — likely an Ostgut-affiliated duo |
-| **CW/A** | 2017, Berghain (1) | Members? |
+| **I/Y** | 2013–2016, Berghain (4) | = **Irakli & Yacoub** (community) — neither has solo history here, so kept as a single act |
 | **He/aT** | 2014, Berghain (1) | Members? |
 | **M>O>S** | 2016, Panorama Bar (1) | Members? |
 | **∑ (Summe)** | 2016, Berghain (1) | Who? |
 | **Shawn O'Sullivan cluster** | 400PPM (3) · Civil Duty (1) · An-i (1) | How do **400PPM**, **Civil Duty** and **An-i** relate to each other and to Shawn O'Sullivan? |
 
-> ✅ **Recently solved by the community:** *Doms & Deykers* = **Steffi** (Steffie Doms) + **Martyn** (Martijn Deykers) — now credited above. Thanks r/Berghain_Community! 🙏
+> ✅ **Recently solved by the community** (thanks r/Berghain_Community! 🙏):
+> - *Doms & Deykers* = **Steffi** (Steffie Doms) + **Martyn** (Martijn Deykers)
+> - *O/V/R* = **James Ruskin** + **Regis** · *A&S* = **Dimi Angélis** + **Jeroen Search** · *CW/A* = **Clockwork** + **Avatism** — all now credited above
+> - *I/Y* identified as **Irakli & Yacoub** (kept whole — neither has solo history here)
+> - **Vera ≠ Vera Logdanidi** (German vs Ukrainian DJ) and **Philippa ≠ Philippa Pacho** confirmed as **different** people — kept separate
 
 ---
 
