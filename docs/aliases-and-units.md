@@ -69,6 +69,7 @@ Groups whose members have **no** solo history in the data (e.g. **Âme**, **Tale
 | **A&S** | Dimi Angélis · Jeroen Search |
 | **CW/A** | Clockwork · Avatism |
 | **Highgrade** *(label showcase)* | Tom Clark · Todd Bodine · Daniel Dreier · Markus Homm |
+| **Roog Unit** | Ø [Phase] · Luke Slater |
 
 > **Label showcases & DJ teams** (e.g. Dekmantel Soundsystem, Innervisions, M>O>S, Dial allstars, Raw Series) are kept as their own billed acts — they genuinely played that slot. They're only broken into members when the lineup actually names the DJs, as with *Highgrade* above.
 
@@ -108,6 +109,7 @@ Cryptic act names where we cannot yet identify the members. If at least one memb
 > - *He/aT* = **Chris Finke** (former name of the UK producer; also Bodyjack) — solo act, kept as-is
 > - *∑ (Summe)* = solo project of producer **Frieder Blume** (now **Struktur**) — not a duo, kept as-is
 > - *M>O>S* is a **label** (M>O>S Recordings), not an artist — kept as-is
+> - *Roog Unit* = **Ø [Phase]** + **Luke Slater** (their Mote-Evolver project) — now credited above
 
 ---
 
