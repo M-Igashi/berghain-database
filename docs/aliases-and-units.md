@@ -33,6 +33,7 @@ The **primary** is the better-known / more-played name. Aliases that have *no* s
 | **Shed aka Head High aka EQD** | René Pawlowitz — three of his aliases in the data |
 | **Planetary Assault Systems aka Luke Slater aka L.B. Dub Corp** | Luke Slater's main techno aliases |
 | **Soundstream aka Soundhack** | Both are aliases of Frank Timm |
+| **R.M.K aka Roberto** | Rob Kirkaldy (London); also releases as Fossil Archive |
 
 ### Intentionally kept separate
 
@@ -90,7 +91,6 @@ Possible duplicates that have **not** been merged. Years and venues are shown to
 | **Talisman** — 2019, Berghain (1) | **Talismann** — 2014 & 2023, Berghain (2) | Could be the same act or two different ones |
 | **OP/H** — 2022, Berghain (1) | **OPH** — Berghain (9) | Slash-vs-no-slash; possibly the same act |
 | **Ghetto** — 2015–2016, PBar (2) | **Daniel Paul aka Ghetto** — 2013, PBar (1) | We currently assume these are **different** people — please confirm |
-| **Roberto** — 2014–2019, Berghain (4) | **Roberto Bosco** — 2010, Berghain (2) | We currently assume these are **different** — please confirm |
 
 ### B. Who is behind these duo / project names?
 
@@ -110,6 +110,7 @@ Cryptic act names where we cannot yet identify the members. If at least one memb
 > - *∑ (Summe)* = solo project of producer **Frieder Blume** (now **Struktur**) — not a duo, kept as-is
 > - *M>O>S* is a **label** (M>O>S Recordings), not an artist — kept as-is
 > - *Roog Unit* = **Ø [Phase]** + **Luke Slater** (their Mote-Evolver project) — now credited above
+> - **Roberto** = **R.M.K** = Fossil Archive (Rob Kirkaldy) → merged as *R.M.K aka Roberto*; confirmed **different** from **Roberto Bosco** (kept separate)
 
 ---
 
