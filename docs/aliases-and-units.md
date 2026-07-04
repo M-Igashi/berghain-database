@@ -72,14 +72,15 @@ Groups whose members have **no** solo history in the data (e.g. **Âme**, **Tale
 | **CW/A** | Clockwork · Avatism |
 | **Highgrade** *(label showcase)* | Tom Clark · Todd Bodine · Daniel Dreier · Markus Homm |
 | **Roog Unit** | Ø [Phase] · Luke Slater |
+| **Civil Duty** | Shawn O'Sullivan (aka 400PPM) · Beau Wanzer |
 
 > **Label showcases & DJ teams** (e.g. Dekmantel Soundsystem, Innervisions, M>O>S, Dial allstars, Raw Series) are kept as their own billed acts — they genuinely played that slot. They're only broken into members when the lineup actually names the DJs, as with *Highgrade* above.
 
 ---
 
-## 3. Open questions — help us confirm
+## 3. Identity checks — resolved
 
-These entries are flagged but **not yet changed**, because they need a real-world identity check. If you know the answer (ideally with a Discogs / Resident Advisor / official source), please [open an issue](https://github.com/M-Igashi/berghain-database/issues/new?template=data_correction.md).
+Identity questions raised in [issue #1](https://github.com/M-Igashi/berghain-database/issues/1). **All items are now resolved** — kept here as a record. Spotted a mistake? Please [open an issue](https://github.com/M-Igashi/berghain-database/issues/new?template=data_correction.md).
 
 ### A. Are these the same artist?
 
@@ -92,12 +93,10 @@ These entries are flagged but **not yet changed**, because they need a real-worl
 
 ### B. Who is behind these duo / project names?
 
-Cryptic act names where we cannot yet identify the members. If at least one member has solo history in the data, we would credit them (see section 2).
-
-| Act | Appearances | What we know |
-| --- | --- | --- |
-| **I/Y** | 2013–2016, Berghain (4) | = **Irakli & Yacoub** (community) — neither has solo history here, so kept as a single act |
-| **Shawn O'Sullivan cluster** | 400PPM (3) · Civil Duty (1) · An-i (1) | How do **400PPM**, **Civil Duty** and **An-i** relate to each other and to Shawn O'Sullivan? |
+> ✅ **All resolved (July 2026)** — the **Shawn O'Sullivan cluster** (issue #1 E9):
+> - **400PPM** = **Shawn O'Sullivan** (solo alias) — annotated *400PPM aka Shawn O'Sullivan*.
+> - **Civil Duty** = **Shawn O'Sullivan** (aka 400PPM) + **Beau Wanzer** (The Corner) — decomposed (see section 2); Berghain's own listing states *"Civil Duty is the alias for Shawn O'Sullivan and Beau Wanzer."*
+> - **An-i** = **Lee Douglas** (Cititrax; ex-NY, Berlin-based) — a **different** person, **not** part of the O'Sullivan cluster. Kept as its own act (O'Sullivan's RA aliases are Led Er Est / Further Reductions / Civil Duty / 400PPM / Vapauteen / Weld — no An-i).
 
 > ✅ **Recently solved by the community** (thanks r/Berghain_Community! 🙏):
 > - *Doms & Deykers* = **Steffi** (Steffie Doms) + **Martyn** (Martijn Deykers)
