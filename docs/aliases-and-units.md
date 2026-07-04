@@ -2,7 +2,7 @@
 
 How this database handles DJs who record under multiple names, and duos / collectives whose members also play solo.
 
-A single human can appear on a lineup under several names, and a back-to-back duo is really two soloists sharing a slot. To keep rankings, search, and per-artist histories accurate, the dataset normalises both cases. This page documents every consolidation made so far (two passes: **May 2026** and **June 2026**).
+A single human can appear on a lineup under several names, and a back-to-back duo is really two soloists sharing a slot. To keep rankings, search, and per-artist histories accurate, the dataset normalises both cases. This page documents every consolidation made so far (three passes: **May 2026**, **June 2026** and **July 2026**).
 
 > Scope: this page covers **alias `aka` notation** and **collective member credits** only. Plain spelling-typo fixes and silent record merges are not listed here.
 
@@ -34,6 +34,7 @@ The **primary** is the better-known / more-played name. Aliases that have *no* s
 | **Planetary Assault Systems aka Luke Slater aka L.B. Dub Corp** | Luke Slater's main techno aliases |
 | **Soundstream aka Soundhack** | Both are aliases of Frank Timm |
 | **R.M.K aka Roberto** | Rob Kirkaldy (London); also releases as Fossil Archive |
+| **Daniel Paul Cortez aka Ghetto** | Minneapolis DJ (ex-*DJ Ghetto*, DVS1's Future Classic resident); merged the *Ghetto*, *Daniel Paul aka Ghetto* and *Daniel Paul Cortez* entries |
 
 ### Intentionally kept separate
 
@@ -82,15 +83,12 @@ These entries are flagged but **not yet changed**, because they need a real-worl
 
 ### A. Are these the same artist?
 
-Possible duplicates that have **not** been merged. Years and venues are shown to help compare.
-
-| Entry A | Entry B | Our current guess |
-| --- | --- | --- |
-| **Stephan Hill** — 2010, Panorama Bar (1) | **Stefan Hill** — 2013, Panorama Bar (1) | Possible spelling variant — unconfirmed |
-| **Thomas Svensson** — 2014, Panorama Bar (1) | **Tomas Svensson** — 2013, Panorama Bar (1) | Possible spelling variant — unconfirmed |
-| **Talisman** — 2019, Berghain (1) | **Talismann** — 2014 & 2023, Berghain (2) | Could be the same act or two different ones |
-| **OP/H** — 2022, Berghain (1) | **OPH** — Berghain (9) | Slash-vs-no-slash; possibly the same act |
-| **Ghetto** — 2015–2016, PBar (2) | **Daniel Paul aka Ghetto** — 2013, PBar (1) | We currently assume these are **different** people — please confirm |
+> ✅ **All resolved (July 2026)** — thanks to community input on [issue #1](https://github.com/M-Igashi/berghain-database/issues/1):
+> - **Stefan Hill → Stephan Hill** — spelling variant, merged (RA / official bill "Stephan Hill").
+> - **Thomas Svensson → Tomas Svensson** — spelling variant, merged (RA canonical "Tomas Svensson"; Swedish, Berlin-based).
+> - **OP/H → OPH** — slash-vs-no-slash variant of the same act, merged.
+> - **Ghetto = Daniel Paul aka Ghetto = Daniel Paul Cortez** — all one person: **Daniel Paul Cortez** (Minneapolis; ex-*DJ Ghetto*; DVS1's Future Classic resident & supporting DJ). Merged as *Daniel Paul Cortez aka Ghetto* (see section 1). The 2017 Panorama Bar billing is Berghain's own wording: *"Aus Minneapolis … Daniel Paul Cortez, der bis vor kurzem noch als DJ Ghetto aufgelegt hat."* This is **not** the Berlin *Daniel Paul* (Cab Drivers / Slope / Cabinet Records), who does not appear in the data (an RA event tag links there by mistake).
+> - **Talisman ≠ Talismann** — confirmed **different** acts, kept separate.
 
 ### B. Who is behind these duo / project names?
 
