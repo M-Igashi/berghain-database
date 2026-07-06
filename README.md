@@ -124,6 +124,10 @@ This database is maintained by the community, and community input is a large par
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on submitting corrections with proper sources.
 
+## Privacy
+
+**No ads. No cookies. No trackers. We never fuck your privacy.** The site sets zero cookies, runs no advertising, and embeds no third-party analytics or tracking scripts. AI-crawler statistics are aggregated server-side only — nothing about human visitors is collected, profiled, or sold.
+
 ## Support
 
 This database is a labor of love, maintained for the global Techno community.
