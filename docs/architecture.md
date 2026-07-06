@@ -36,7 +36,7 @@ Cloudflare Edge Network (300+ global PoPs)
 | Cache (L2) | Workers KV | Global key-value store |
 | Storage | Cloudflare R2 | Static assets (flyers, images) |
 | Analytics | Cloudflare Analytics Engine | AI crawler stats & revenue tracking |
-| AI Paywall | x402 protocol + Coinbase CDP | USDC micropayments on Solana mainnet |
+| Payments | x402 protocol + Coinbase CDP | USDC micropayments on Solana mainnet (exports & flyer PDFs) |
 
 ## 3-Tier Cache System
 
@@ -58,8 +58,10 @@ The API implements a multi-layer caching strategy that reduces database reads by
 | Artist details | 4 hours | 7 days |
 | Current residents | 30 days | 30 days |
 | Years / Period | 24 hours | 30 days |
-| Search results | 2 hours | 24 hours |
+| Search results | 2 hours | memory-only¹ |
 | Sitemap / RSS | 6–12 hours | 7 days |
+
+¹ High-cardinality endpoints (per-artist by id/slug/name, and free-text search) use a **memory → D1** tier only, skipping KV. Writing one KV key per artist would exceed the free-tier KV write limit when a crawler sweeps all ~2,500 artists, so these paths fall through to D1 (which has a much higher daily read budget) on a cold miss.
 
 ### Cache Flow
 
@@ -80,7 +82,10 @@ Requests pass through the following middleware in order:
 1. **ASN Blocking** — blocks known abusive autonomous systems
 2. **Crawler Stats** — detects AI crawlers and writes events to Analytics Engine
 3. **CORS** — enables cross-origin requests
-4. **x402 Paywall** — charges AI crawlers via x402 (humans pass through)
+4. **x402 Paywall** (`/api/export/*`, `/flyers/*`) — requires payment from **all** requesters
+5. **x402 Signal** (`/api/*`, `/current-residents`) — free responses that carry x402 discovery headers so AI agents can find the paid routes
+
+Note: the paywall applies to exports and flyer PDFs regardless of who is asking. Every other route is free for everyone, including AI crawlers.
 
 ## Performance Targets
 

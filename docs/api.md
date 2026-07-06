@@ -9,7 +9,7 @@
 - **Content negotiation** — HTML pages return markdown with `Accept: text/markdown`
 - **Special character support** — handles characters like Ø, ø, À-ÿ, etc.
 - **Fast responses** — <100ms average with >95% cache hit rate
-- **x402 paywall** — AI crawlers pay per request via [x402 protocol](x402-ai-paywall.md); humans are free
+- **Free & open** — every endpoint below is free for everyone, including AI crawlers; only bulk exports and flyer PDFs are paid via the [x402 protocol](x402-ai-paywall.md)
 
 ## Endpoints
 
@@ -21,12 +21,12 @@ Overall database statistics including total counts and venue breakdown.
 
 ```json
 {
-  "total_artists": 2099,
-  "total_events": 748,
-  "total_performances": 10466,
+  "total_artists": 2515,
+  "total_events": 1030,
+  "total_performances": 13204,
   "venue_breakdown": [
-    { "venue": "Berghain", "count": 5581 },
-    { "venue": "Panorama Bar", "count": 4885 }
+    { "venue": "Berghain", "count": 6763 },
+    { "venue": "Panorama Bar", "count": 6441 }
   ]
 }
 ```
@@ -81,13 +81,13 @@ Detailed statistics for an artist including career span.
 ```json
 {
   "name": "Ben Klock",
-  "total_performances": 138,
-  "berghain_performances": 130,
-  "panorama_performances": 8,
-  "first_performance": "2009-12-12",
-  "last_performance": "2026-01-04",
-  "active_years": 17,
-  "recent_performances_2years": 22
+  "total_performances": 197,
+  "berghain_performances": 186,
+  "panorama_performances": 11,
+  "first_performance": "2005-01-15",
+  "last_performance": "2026-06-13",
+  "active_years": 22,
+  "recent_performances_2years": 23
 }
 ```
 
@@ -151,19 +151,18 @@ Browse all Klubnacht events.
     "id": 912,
     "event_id": 79500,
     "title": "Klubnacht",
-    "date": "28.02.2026",
+    "date": "Saturday 28.02.2026 start 00:00",
     "iso_date": "2026-02-28",
     "year": 2026,
     "month": 2,
     "url": "https://www.berghain.berlin/de/event/79500/",
-    "total_artists": 14
+    "total_artists": 14,
+    "actual_performances": 14
   }
 ]
 ```
 
-#### `GET /api/shows/:eventId`
-
-Event details with full lineup.
+For 2004–2009 events the `url` points to the source flyer PDF (e.g. `https://www.berghain.berlin/documents/110/berghain-flyer-2005-12.pdf`) rather than an event page. The full lineup for a single event is available as an HTML/Markdown page at `/shows/:eventId` (there is no JSON endpoint for a single event).
 
 ### Residents
 
@@ -192,17 +191,31 @@ Current active residents based on 3-year rolling performance analysis (minimum 2
 | --- | --- |
 | `GET /api/years` | List of available years in the database |
 | `GET /api/period` | Data coverage date range |
-| `GET /api/flyers` | Monthly flyer archive metadata |
+| `GET /api/flyers` | Index of the 2004–2009 flyer archive (free; the PDFs themselves are paid) |
 
-### Bulk Export
+### Bulk Export (paid via x402)
+
+Full-table dumps. Support `?format=json` (default) or `?format=csv`. **$0.10 per request for everyone** (not only AI crawlers) via [x402](x402-ai-paywall.md).
 
 | Endpoint | Description |
 | --- | --- |
-| `GET /api/export/artists` | Export all artists as JSON |
-| `GET /api/export/events` | Export all events as JSON |
-| `GET /api/export/performances` | Export all performances as JSON |
+| `GET /api/export/artists` | Export all artists |
+| `GET /api/export/events` | Export all events |
+| `GET /api/export/performances` | Export all performances |
 
-> **Note**: Export endpoints cost $0.10 per request for AI crawlers via x402.
+### Historical Flyers (2004–2009)
+
+| Endpoint | Description |
+| --- | --- |
+| `GET /flyers/berghain-flyer-YYYY-MM.pdf` | Original monthly flyer PDF — **$0.01 per request** via x402 |
+
+### Machine-Readable Discovery
+
+| Endpoint | Description |
+| --- | --- |
+| `GET /openapi.json` | OpenAPI 3 specification (with x402 price annotations) |
+| `GET /.well-known/x402` | x402 payment manifest (routes, pricing, wallet) |
+| `GET /.well-known/agentic-capabilities.json` | Agent capability descriptor |
 
 ### Discovery and Feeds
 

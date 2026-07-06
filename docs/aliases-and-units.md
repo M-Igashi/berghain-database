@@ -2,7 +2,7 @@
 
 How this database handles DJs who record under multiple names, and duos / collectives whose members also play solo.
 
-A single human can appear on a lineup under several names, and a back-to-back duo is really two soloists sharing a slot. To keep rankings, search, and per-artist histories accurate, the dataset normalises both cases. This page documents every consolidation made so far (three passes: **May 2026**, **June 2026** and **July 2026**).
+A single human can appear on a lineup under several names, and a back-to-back duo is really two soloists sharing a slot. To keep rankings, search, and per-artist histories accurate, the dataset normalises both cases. This page documents every consolidation made so far, across passes in **May 2026**, **June 2026**, and **July 2026** (including the 2004–2009 flyer-verification round, [issue #5](https://github.com/M-Igashi/berghain-database/issues/5)).
 
 > Scope: this page covers **alias `aka` notation** and **collective member credits** only. Plain spelling-typo fixes and silent record merges are not listed here.
 
@@ -17,6 +17,8 @@ Primary Name aka Alias
 ```
 
 The **primary** is the better-known / more-played name. Aliases that have *no* separate history in the data are left untouched — the goal is to reflect what actually appears in the lineups, not to maintain an exhaustive external discography.
+
+One exception: when a flyer's **own billing** prints the `aka` (e.g. the 2007-10-27 flyer billed *"Jackmate aka Soulphiction LIVE"*), that annotation is kept even if the second name has no separate entry — because it is part of how the act actually appeared in the lineup.
 
 ### Annotated aliases
 
@@ -35,6 +37,8 @@ The **primary** is the better-known / more-played name. Aliases that have *no* s
 | **Soundstream aka Soundhack** | Both are aliases of Frank Timm |
 | **R.M.K aka Roberto** | Rob Kirkaldy (London); also releases as Fossil Archive |
 | **Daniel Paul Cortez aka Ghetto** | Minneapolis DJ (ex-*DJ Ghetto*, DVS1's Future Classic resident); merged the *Ghetto*, *Daniel Paul aka Ghetto* and *Daniel Paul Cortez* entries |
+| **Sven von Thülen aka Sven.vt** | Merged the flyer-era *Sven.vt* billing (de:bug, 2004–2009) into Sven von Thülen |
+| **Jackmate aka Soulphiction** | Michel Baumann (Stuttgart, Philpot); the 2007-10-27 flyer billed *"Jackmate aka Soulphiction"* verbatim |
 
 ### Intentionally kept separate
 
@@ -73,6 +77,7 @@ Groups whose members have **no** solo history in the data (e.g. **Âme**, **Tale
 | **Highgrade** *(label showcase)* | Tom Clark · Todd Bodine · Daniel Dreier · Markus Homm |
 | **Roog Unit** | Ø [Phase] · Luke Slater |
 | **Civil Duty** | Shawn O'Sullivan (aka 400PPM) · Beau Wanzer |
+| **Zander VT** | Sven von Thülen · Fritz Zander (their BPitch Control duo, active to ~2012) |
 
 > **Label showcases & DJ teams** (e.g. Dekmantel Soundsystem, Innervisions, M>O>S, Dial allstars, Raw Series) are kept as their own billed acts — they genuinely played that slot. They're only broken into members when the lineup actually names the DJs, as with *Highgrade* above.
 
@@ -108,6 +113,14 @@ Identity questions raised in [issue #1](https://github.com/M-Igashi/berghain-dat
 > - *M>O>S* is a **label** (M>O>S Recordings), not an artist — kept as-is
 > - *Roog Unit* = **Ø [Phase]** + **Luke Slater** (their Mote-Evolver project) — now credited above
 > - **Roberto** = **R.M.K** = Fossil Archive (Rob Kirkaldy) → merged as *R.M.K aka Roberto*; confirmed **different** from **Roberto Bosco** (kept separate)
+
+### C. Flyer-era verification ([issue #5](https://github.com/M-Igashi/berghain-database/issues/5))
+
+> ✅ **All resolved (July 2026)** — the 2004–2009 flyer import's low-confidence OCR readings and look-alike names were checked against the original flyer PDFs (label credits + printed artist descriptions) and Discogs/RA:
+> - **Darko Esser** — the 2007-04-28 flyer prints "Darko Esser" (Ovum); the earlier *Dana Esser* reading was an OCR error, now merged.
+> - **Navid Tahernia** — corrected from the flyer's own typo *Tahernina*.
+> - **Martin Decaria** — split out of the combined *"Martin Decaria, Yassin + Arne"* entry.
+> - **Kept separate, confirmed on the flyers:** Aaron Carl (Detroit/Wallshaker) ≠ Aaron Clark · Ada (Areal) ≠ LADA / AIDA · Chaton (Geneva/Plak) ≠ Eschaton · Daso (My Best Friend) ≠ DASCO · Diego (Kanzleramt) ≠ Dego · David X (San Diego/United) ≠ David K · François K (Kevorkian) ≠ François X · Jackmate (Soulphiction) ≠ Jackmaster.
 
 ---
 
