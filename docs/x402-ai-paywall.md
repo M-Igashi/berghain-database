@@ -1,53 +1,54 @@
-# x402 AI Paywall
+# x402 & AI Access
 
 ## Overview
 
-The Berghain Database uses the [x402 protocol](https://x402.org) to monetize AI crawler access. Human users and search engine bots access everything for free — only AI crawlers are required to pay.
+The Berghain Database runs a **freemium** model. Almost the entire API is free for everyone — humans, search engines, **and AI crawlers** — which is deliberate: open access maximizes the archive's visibility in AI search and answer engines.
+
+Only two categories of route are paid, via the [x402 protocol](https://x402.org), and they are paid by **every** requester (not just AI crawlers):
+
+- **Bulk exports** — full-table dumps at `/api/export/*`
+- **Historical flyer PDFs** — the original 2004–2009 flyer scans at `/flyers/*`
 
 ## How It Works
 
 ```
-Request → detectCrawler(User-Agent)
-  ├── null (human / search bot) → free access
-  └── AI crawler detected → x402 payment middleware
-        ├── No payment → HTTP 402 with payment instructions
-        └── Valid payment → HTTP 200 (access granted)
+Request
+  ├── /api/export/*, /flyers/*   → x402 payment middleware (all requests)
+  │       ├── no payment  → HTTP 402 Payment Required (with payment instructions)
+  │       └── valid X-PAYMENT → HTTP 200 (access granted)
+  └── everything else            → free
+          └── /api/*, /current-residents also return x402 *signal* headers
+              so AI agents can discover the paid routes and pricing
 ```
 
-1. The middleware inspects the `User-Agent` header on every `/api/*` request
-2. If the User-Agent matches a known AI crawler, the x402 payment middleware activates
-3. The server returns `HTTP 402 Payment Required` with payment instructions in the response headers
-4. AI agents with x402 support pay automatically — no accounts or API keys needed
-5. After payment verification, the response is returned normally
+AI crawlers are still **detected** by User-Agent — not to charge them for normal endpoints, but to (a) record activity for the public transparency dashboard, (b) attach x402 discovery headers to free responses, and (c) note when a crawler pays for an export or flyer.
 
 ## Pricing
 
-| Endpoint | Price (USDC) | Description |
+| Endpoint | Price (USDC) | Applies to |
 | --- | --- | --- |
-| `GET /api/stats` | $0.01 | Overall statistics |
-| `GET /api/stats/monthly` | $0.01 | Monthly breakdown |
-| `GET /api/artists/ranking` | $0.01 | Artist rankings |
-| `GET /api/artists/ranking/year/:year` | $0.01 | Yearly rankings |
-| `GET /api/artists/:id/performances` | $0.02 | Performance history |
-| `GET /api/artists/:id/stats` | $0.02 | Artist statistics |
-| `GET /api/export/artists` | $0.10 | Bulk artist export |
-| `GET /api/export/events` | $0.10 | Bulk event export |
-| `GET /api/export/performances` | $0.10 | Bulk performance export |
+| `GET /api/export/artists` | $0.10 | all requests |
+| `GET /api/export/events` | $0.10 | all requests |
+| `GET /api/export/performances` | $0.10 | all requests |
+| `GET /flyers/*.pdf` | $0.01 | all requests |
 
-## Free Endpoints (No Payment Required)
+Export endpoints support `?format=json` (default) or `?format=csv`.
 
-These endpoints are always free, regardless of User-Agent:
+## Free Endpoints (No Payment, Any Requester)
+
+Everything not listed in the pricing table above is free, including:
 
 - All HTML pages (`/`, `/current-residents`, `/artists/*`, `/shows/*`)
-- `GET /api/artists` — artist search
-- `GET /api/artists/:id` — basic artist info
-- `GET /api/shows` — event list
-- `GET /api/residents/current` — current residents
-- `GET /api/years`, `GET /api/period`, `GET /api/flyers`
-- `GET /llms.txt`, `GET /llms-full.txt`
+- `GET /api/stats`, `GET /api/stats/monthly` — statistics
+- `GET /api/artists/ranking`, `GET /api/artists/ranking/year/:year` — rankings
+- `GET /api/artists`, `GET /api/artists/:id`, `GET /api/artists/by-name/:name`
+- `GET /api/artists/:id/performances`, `GET /api/artists/:id/stats`
+- `GET /api/shows`, `GET /api/residents/current`, `GET /api/years`, `GET /api/period`
+- `GET /api/flyers` — the flyer archive **index** (only the PDF files themselves are paid)
+- `GET /llms.txt`, `GET /llms-full.txt`, `GET /openapi.json`
+- `GET /.well-known/x402`, `GET /.well-known/agentic-capabilities.json`
 - `GET /sitemap.xml`, `GET /robots.txt`, `GET /feed.xml`
-- `GET /api/public/crawl-summary` — public crawl stats
-- `GET /dashboard/crawl-stats` — crawl stats dashboard
+- `GET /api/public/crawl-summary`, `GET /dashboard/crawl-stats`
 
 ## Payment Details
 
@@ -58,8 +59,9 @@ These endpoints are always free, regardless of User-Agent:
 | Currency | USDC (`EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v`) |
 | Facilitator | [Coinbase CDP](https://docs.cdp.coinbase.com/) (`https://api.cdp.coinbase.com/platform/v2/x402`) |
 | Wallet | `8oj2PMky2Zx9qznjK5eG7AUdqRab8GnrFJ7UamfEKRu` |
+| Manifest | [`/.well-known/x402`](https://berghain.ravers.workers.dev/.well-known/x402) |
 
-Payment verification and settlement are handled by the Coinbase Developer Platform (CDP) facilitator. The server generates ES256 JWTs for authenticating with the CDP API, which verifies on-chain USDC transactions on Solana mainnet.
+Payment verification and settlement are handled by the Coinbase Developer Platform (CDP) facilitator. The server generates ES256 JWTs to authenticate with the CDP API, which verifies on-chain USDC transactions on Solana mainnet.
 
 ## Using x402 as a Client
 
@@ -70,21 +72,20 @@ import { wrapFetchWithPayment } from "@x402/fetch";
 
 const x402Fetch = wrapFetchWithPayment(fetch, wallet);
 const response = await x402Fetch(
-  "https://berghain.ravers.workers.dev/api/stats"
+  "https://berghain.ravers.workers.dev/api/export/artists?format=csv"
 );
-const data = await response.json();
 ```
 
 ### Manual Flow
 
-1. Request a paid endpoint
-2. Receive `HTTP 402` with `X-PAYMENT` header containing JSON payment instructions
+1. Request a paid endpoint (e.g. `GET /api/export/artists`)
+2. Receive `HTTP 402` with payment instructions
 3. Submit a USDC transaction on Solana as specified
-4. Retry the request with the payment proof in the `X-PAYMENT-RESPONSE` header
+4. Retry the request with the payment proof in the `X-PAYMENT` header
 
 ## Detected AI Crawlers
 
-Over 80 AI crawlers are detected and subject to x402 pricing:
+Over 80 AI crawlers are recognized (for stats and x402 discovery signaling). A non-exhaustive list:
 
 **OpenAI / Microsoft**: GPTBot, ChatGPT-User, ChatGPT-Agent, OAI-SearchBot, Operator
 
@@ -124,13 +125,13 @@ Over 80 AI crawlers are detected and subject to x402 pricing:
 
 **Others**: YouBot, AI2Bot, Timpibot, ImagesiftBot, QualifiedBot, KlaviyoAIBot
 
-> Human browsers and traditional search engine crawlers (Googlebot, bingbot, etc.) are **not** affected. They access all content for free.
+> Human browsers and traditional search engine crawlers (Googlebot, bingbot, etc.) are unaffected and, like AI crawlers, access all non-paid content for free.
 
 ## Crawl Statistics & Revenue Tracking
 
-All AI crawler activity is tracked via **Cloudflare Analytics Engine**, providing real-time analytics without impacting request performance.
+All AI crawler activity — free requests and paid transactions — is tracked via **Cloudflare Analytics Engine**, providing real-time analytics without impacting request performance.
 
-Each crawl event records:
+Each event records:
 - Crawler identity (User-Agent)
 - Requested path
 - Event type (request or paid)
@@ -142,11 +143,4 @@ Each crawl event records:
 
 ### Dashboard
 
-A visual dashboard is available at [`/dashboard/crawl-stats`](https://berghain.ravers.workers.dev/dashboard/crawl-stats) showing:
-
-- Daily crawler request volume (paid vs. blocked)
-- Daily revenue chart (USDC)
-- Per-crawler revenue breakdown
-- Crawler rankings by request count and payment status
-- Most accessed paths
-- 30/90-day trend views
+A visual dashboard is available at [`/dashboard/crawl-stats`](https://berghain.ravers.workers.dev/dashboard/crawl-stats) showing daily crawler volume (paid vs. free), revenue, per-crawler breakdowns, and most-accessed paths.

@@ -35,15 +35,15 @@ Have an idea for improvement?
 ### What Data We Accept
 
 **✅ Good Contributions:**
-- Historical Berghain/Panorama Bar performances (**November 2009 - ongoing**)
+- Historical Berghain/Panorama Bar performances (**18 December 2004 - ongoing**)
 - Corrections with reliable, verifiable sources
-- Missing artist performance records
+- Missing artist performance records (including gaps in the 2004–2009 flyer era)
 - Event details from official Berghain sources
 - Artist name normalization improvements (handling special characters: ¥, Ø, ø, À-ÿ)
 
 **❌ What We Don't Accept:**
 - Data from other venues or clubs
-- Events outside our documentation period (pre-2009 or non-Berghain events)
+- Non-core-Klubnacht floors (Säule, Lab.oratory, Garden) and non-Berghain events
 - Speculative or unverified information
 - Personal opinions presented as factual data
 - Commercially sensitive or private information
@@ -122,7 +122,7 @@ All data corrections must include **credible, verifiable sources**:
 
 ### Data Access Ethics
 
-- **Respect the data** — this represents real artists and cultural history spanning 16+ years
+- **Respect the data** — this represents real artists and cultural history spanning 20+ years
 - **Credit the source** — mention "Berghain Database" in your projects using this data
 - **Share improvements** — if you find errors or inconsistencies, report them back
 - **Non-commercial use** — respect the community nature of this project
@@ -224,7 +224,7 @@ Contributors will be recognized:
 
 - In release notes for significant data contributions
 - In the project documentation for ongoing contributors
-- With our eternal gratitude for preserving 16+ years of Techno history!
+- With our eternal gratitude for preserving 20+ years of Techno history!
 
 Major contributors may be invited to help with database moderation and quality control.
 
@@ -243,13 +243,13 @@ This database represents one of the most comprehensive archives of a single venu
 
 | Metric | Value |
 |--------|-------|
-| **Documentation Period** | 16+ years (November 2009 - ongoing) |
-| **Total Artists** | 2,099+ from the global Techno community |
-| **Performance Records** | 10,466+ documented appearances |
-| **Events Cataloged** | 748+ Klubnacht sessions |
+| **Documentation Period** | 20+ years (18 December 2004 - ongoing) |
+| **Total Artists** | 2,500+ from the global Techno community |
+| **Performance Records** | 13,000+ documented appearances |
+| **Events Cataloged** | 1,000+ Klubnacht sessions |
 | **Update Frequency** | Monthly with latest lineups |
 
-Your contributions help preserve the cultural legacy of Berghain's golden era and its ongoing influence on global electronic music.
+Your contributions help preserve the cultural legacy of Berghain from its opening night onward and its ongoing influence on global electronic music.
 
 ---
 

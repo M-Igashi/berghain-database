@@ -38,12 +38,14 @@ The database uses Cloudflare D1 (SQLite) with three core tables.
 | `id` | INTEGER | Primary key (auto-increment) |
 | `event_id` | INTEGER | Original Berghain event ID (unique) |
 | `title` | TEXT | Event title (typically "Klubnacht") |
-| `date` | TEXT | Display format: `DD.MM.YYYY` |
+| `date` | TEXT | Human-readable display string, e.g. `Saturday 28.02.2026 start 00:00` |
 | `iso_date` | TEXT | ISO 8601 format: `YYYY-MM-DD` |
 | `year` | INTEGER | Event year |
 | `month` | INTEGER | Event month (1–12) |
-| `url` | TEXT | Original event page URL on berghain.berlin |
-| `total_artists` | INTEGER | Number of artists on the lineup |
+| `url` | TEXT | Source URL: a berghain.berlin event page (2009–present) or the source flyer PDF (2004–2009) |
+| `total_artists` | INTEGER | Billed act count from the source (kept stable; may differ from the joined performance count) |
+
+> **`event_id`**: for 2009-present events this is the original berghain.berlin event ID; for 2004–2009 flyer-sourced events it is a synthetic ID (e.g. `20051217`) since no online event page exists.
 
 ### `performances`
 
