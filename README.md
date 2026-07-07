@@ -1,6 +1,6 @@
 # Berghain Klubnacht Database
 
-The most comprehensive historical archive of DJ performances at Berlin's Berghain nightclub — every Klubnacht since the club opened on **18 December 2004**.
+The most comprehensive historical archive of DJ performances at Berlin's Berghain nightclub — every club night in the Saturday Klubnacht slot since the club opened on **18 December 2004**.
 
 **Live**: [berghain.ravers.workers.dev](https://berghain.ravers.workers.dev)
 
@@ -21,9 +21,9 @@ The most comprehensive historical archive of DJ performances at Berlin's Berghai
 | Performances | 13,000+ |
 | Coverage | 18 December 2004 (opening night) – present (ongoing) |
 
-This project preserves the history of one of the world's most influential Techno institutions by cataloging every DJ performance at Berghain and Panorama Bar.
+This project preserves the history of one of the world's most influential Techno institutions by cataloging every club night in the Saturday Klubnacht slot — Klubnacht itself plus SNAX Club, label nights, anniversaries and holiday specials — on the Berghain main floor and Panorama Bar. See the [Data Policy](docs/data-policy.md) for exactly what counts.
 
-The **2004–2009** era is reconstructed from the official monthly flyer archive (61 flyers), digitized and visually verified against the original PDFs — down to the label credits and artist descriptions printed on each flyer. **November 2009 onwards** comes directly from [berghain.berlin](https://www.berghain.berlin/) event listings. Artist names are normalized and cross-referenced against Resident Advisor and Discogs; aliases and units are consolidated the way the flyers themselves billed them. Lab.oratory, Garden, and Säule performances are excluded, as they are not considered core Klubnacht events.
+The **2004–2009** era is reconstructed from the official monthly flyer archive (61 flyers), digitized and visually verified against the original PDFs — down to the label credits and artist descriptions printed on each flyer. **November 2009 onwards** comes directly from [berghain.berlin](https://www.berghain.berlin/) event listings. Artist names are normalized and cross-referenced against Resident Advisor and Discogs; aliases and units are consolidated the way the flyers themselves billed them. Lab.oratory, Säule, Garten/Halle and Kantine performances are excluded, along with Friday series and Panorama-Bar-only holiday specials — see the [Data Policy](docs/data-policy.md) for the full inclusion rules.
 
 ## Tech Stack
 
@@ -45,6 +45,7 @@ The **2004–2009** era is reconstructed from the official monthly flyer archive
 | [Architecture](docs/architecture.md) | System design, caching strategy, and performance |
 | [x402 & AI Access](docs/x402-ai-paywall.md) | Freemium access model and x402 micropayments |
 | [Database Schema](docs/schema.md) | Table definitions and relationships |
+| [Data Policy](docs/data-policy.md) | What counts as a performance: included/excluded event types, floors, sources |
 | [Aliases & Collective Acts](docs/aliases-and-units.md) | How DJ aliases (`aka`) and duo/collective members are represented |
 
 ## API Overview
