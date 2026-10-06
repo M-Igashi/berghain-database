@@ -55,7 +55,7 @@ The API implements a multi-layer caching strategy that reduces database reads by
 | Stats | 4 hours | 7 days |
 | Rankings | 2 hours | 7 days |
 | Events | 6 hours | 7 days |
-| Artist details | 4 hours | 7 days |
+| Artist details & performances | 4 hours | memory-only¹ |
 | Current residents | 30 days | 30 days |
 | Years / Period | 24 hours | 30 days |
 | Search results | 2 hours | memory-only¹ |
@@ -82,8 +82,10 @@ Requests pass through the following middleware in order:
 1. **ASN Blocking** — blocks known abusive autonomous systems
 2. **Crawler Stats** — detects AI crawlers and writes events to Analytics Engine
 3. **CORS** — enables cross-origin requests
-4. **x402 Paywall** (`/api/export/*`, `/flyers/*`) — requires payment from **all** requesters
-5. **x402 Signal** (`/api/*`, `/current-residents`) — free responses that carry x402 discovery headers so AI agents can find the paid routes
+4. **Citability & ETag** — adds canonical URL and data source headers to every response, and an `ETag` to API and page responses so `If-None-Match` revalidation returns an empty `304`
+5. **x402 Paywall** (`/api/export/*`, `/flyers/*`) — requires payment from **all** requesters
+6. **x402 Signal** (`/api/*`, `/current-residents`) — free responses that carry x402 discovery headers so AI agents can find the paid routes
+7. **Admin Auth** (`/admin/*`) — requires the admin key
 
 Note: the paywall applies to exports and flyer PDFs regardless of who is asking. Every other route is free for everyone, including AI crawlers.
 

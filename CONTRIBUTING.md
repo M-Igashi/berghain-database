@@ -43,7 +43,7 @@ Have an idea for improvement?
 
 **❌ What We Don't Accept:**
 - Data from other venues or clubs
-- Non-core-Klubnacht floors (Säule, Lab.oratory, Garden) and non-Berghain events
+- Non-core-Klubnacht floors (Säule, Lab.oratory, Garden) and non-Berghain events (see the [Data Policy](docs/data-policy.md) for exactly what counts)
 - Speculative or unverified information
 - Personal opinions presented as factual data
 - Commercially sensitive or private information
@@ -100,33 +100,13 @@ All data corrections must include **credible, verifiable sources**:
 - JSON responses for API issues
 - curl commands that reproduce the issue
 
-## 🚀 API Usage Best Practices
+## 🚀 Using the API
 
-### For Developers Using the API
+Building something with the data? The [Integration Guide](docs/api.md#integration-guide) covers efficient usage, and [Attribution](docs/api.md#attribution) explains how to credit the source. In short:
 
-**Respectful Usage:**
-- **Cache responses** appropriately (our cache TTL: 2-24 hours depending on endpoint)
-- **Handle rate limits** gracefully (we have generous limits but fair use applies)
-- **Use appropriate endpoints** — `/api/artists/ranking` for rankings, `/api/artists` for search
-- **Implement proper error handling** for network timeouts and API errors
-
-**Performance Optimization:**
-- Use `limit` parameters to control response size
-- Implement pagination for large datasets
-- Consider using `/api/artists/by-name/{name}` for exact matches instead of search
-
-**Technical Integration:**
-- **CORS is enabled** for web applications
-- **Response times** average <100ms for cached responses
-- **Search normalization** handles special characters automatically
-
-### Data Access Ethics
-
-- **Respect the data** — this represents real artists and cultural history spanning 20+ years
-- **Credit the source** — mention "Berghain Database" in your projects using this data
-- **Share improvements** — if you find errors or inconsistencies, report them back
-- **Non-commercial use** — respect the community nature of this project
-- **Preserve context** — when using data, maintain the cultural significance of Berghain
+- **Credit the source**: the data is CC BY 4.0, so credit "Berghain Klubnacht Database" with a link, ideally to each artist's `page_url`
+- **Respect the data**: it represents real artists and 20+ years of cultural history
+- **Share improvements**: if you find errors or inconsistencies, report them back
 
 ## 🔍 Common Data Issues to Look For
 
@@ -156,12 +136,11 @@ We use these labels to organize issues:
 | `enhancement` | New feature or improvement request |
 | `data` | Data correction, addition, or quality issue |
 | `documentation` | Documentation improvements or clarifications |
-| `api` | API-specific issues or improvements |
-| `search` | Search functionality issues |
-| `performance` | Performance or optimization concerns |
+| `question` | Further information is requested |
 | `good first issue` | Easy for newcomers to tackle |
 | `help wanted` | Looking for community contributors |
 | `duplicate` | Issue already exists |
+| `invalid` | Not a valid issue |
 | `wontfix` | Won't be implemented (with explanation) |
 
 ## ⚡ Response Time Expectations
@@ -234,20 +213,12 @@ Not sure about something?
 
 - Create a [general question issue](https://github.com/M-Igashi/berghain-database/issues/new)
 - Check existing issues and discussions first
-- Review the main README.md for comprehensive API documentation
+- See the [API Reference](docs/api.md) for endpoint documentation
 - Remember: thoughtful questions help improve the project for everyone!
 
 ## 🌟 What You're Contributing To
 
-This database represents one of the most comprehensive archives of a single venue's history in electronic music:
-
-| Metric | Value |
-|--------|-------|
-| **Documentation Period** | 20+ years (18 December 2004 - ongoing) |
-| **Total Artists** | 2,500+ from the global Techno community |
-| **Performance Records** | 13,000+ documented appearances |
-| **Events Cataloged** | 1,000+ Klubnacht sessions |
-| **Update Frequency** | Monthly with latest lineups |
+This database represents one of the most comprehensive archives of a single venue's history in electronic music: every Klubnacht since 18 December 2004, updated monthly with the latest lineups (current totals in the [README](README.md#database-overview)).
 
 Your contributions help preserve the cultural legacy of Berghain from its opening night onward and its ongoing influence on global electronic music.
 

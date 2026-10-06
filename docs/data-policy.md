@@ -1,14 +1,10 @@
 # Data Policy — What Counts as a Performance
 
-This document defines which events and performances are included in the
-database, and how ambiguous cases are resolved. It is the canonical reference
-for all imports and corrections.
+This document defines which events and performances are included in the database, and how ambiguous cases are resolved. It is the canonical reference for all imports and corrections.
 
 ## Scope: the Saturday Klubnacht slot
 
-The database catalogs club nights that occupy the **Saturday Klubnacht slot**
-— nights starting Saturday 23:00 or later on the **Berghain main floor**
-and/or **Panorama Bar** — from opening night (18 December 2004) to present.
+The database catalogs club nights that occupy the **Saturday Klubnacht slot** — nights starting Saturday 23:00 or later on the **Berghain main floor** and/or **Panorama Bar** — from opening night (18 December 2004) to present.
 
 ### Included
 
@@ -33,15 +29,7 @@ and/or **Panorama Bar** — from opening night (18 December 2004) to present.
 
 ## Parallel events on one night
 
-When SNAX Club and a Finest Saturday / Klubnacht run in parallel (the annual
-Easter Saturday and November *FC Snax United* weekends), they are **merged
-into one event per night**: the SNAX Berghain floor joins the event, the
-title becomes e.g. `SNAX Club + Oster Klubnacht` or
-`FC Snax United + Finest Saturday Klubnacht`, and the SNAX Lab.oratory floor
-stays excluded. SNAX has its own event page (today on
-[lab-oratory.de](https://www.lab-oratory.de/)), so crawls of the Klubnacht
-page alone always miss its Berghain floor — every Easter and November import
-must check for it.
+When SNAX Club and a Finest Saturday / Klubnacht run in parallel (the annual Easter Saturday and November *FC Snax United* weekends), they are **merged into one event per night**: the SNAX Berghain floor joins the event, the title becomes e.g. `SNAX Club + Oster Klubnacht` or `FC Snax United + Finest Saturday Klubnacht`, and the SNAX Lab.oratory floor stays excluded. SNAX has its own event page (today on [lab-oratory.de](https://www.lab-oratory.de/)), so crawls of the Klubnacht page alone always miss its Berghain floor — every Easter and November import must check for it.
 
 ## Sources and authority
 
@@ -51,14 +39,9 @@ must check for it.
 | Nov 2009 – present | berghain.berlin event pages (official event ids) | For 2010–2011 the current pages are lossy (Saturday-night sets were dropped when running orders were re-rendered); Wayback Machine captures of the berghain.de listings are authoritative there |
 | Current SNAX events | lab-oratory.de | Not listed in the berghain.berlin program |
 
-Artist names are normalized and cross-referenced against Resident Advisor and
-Discogs. Alias (`aka`) and duo/collective handling is documented in
-[Aliases & Collective Acts](aliases-and-units.md).
+Artist names are normalized and cross-referenced against Resident Advisor and Discogs. Alias (`aka`) and duo/collective handling is documented in [Aliases & Collective Acts](aliases-and-units.md).
 
 ## Event fields
 
-- `total_artists` — the number of billed performances (an artist billed on
-  both floors counts twice, matching the source billing).
-- `event_id` — official berghain.berlin id for the web era; `YYYYMMDD` for
-  the flyer era. When two official pages are merged (SNAX + Finest), the
-  Klubnacht/Finest page id is kept.
+- `total_artists` — the number of billed performances (an artist billed on both floors counts twice, matching the source billing).
+- `event_id` — official berghain.berlin id for the web era; `YYYYMMDD` for the flyer era. When two official pages are merged (SNAX + Finest), the Klubnacht/Finest page id is kept.

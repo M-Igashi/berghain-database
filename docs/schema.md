@@ -58,8 +58,12 @@ The database uses Cloudflare D1 (SQLite) with three core tables.
 
 ## Indexes
 
-- `artists.name` — UNIQUE
-- `artists.normalized_name` — for slug-based lookups
-- `events.event_id` — UNIQUE
-- `events.iso_date` — for date range queries
-- `performances(event_id, artist_id)` — composite for join performance
+| Table | Indexed columns | Purpose |
+| --- | --- | --- |
+| `artists` | `name` (UNIQUE) | Exact name lookups |
+| `artists` | `normalized_name` | Slug lookups for `/artists/:slug` |
+| `artists` | `total_performances`, `berghain_performances`, `panorama_performances` (each `DESC`, with `name`) | Rankings |
+| `events` | `event_id` (UNIQUE) | Official id lookups for `/shows/:event_id` |
+| `events` | `iso_date`, `year`, `(year, month)` | Date filters and ordering |
+| `performances` | `artist_id`, `(artist_id, venue)` | Per-artist history and floor counts |
+| `performances` | `event_id`, `(venue, event_id)` | Lineups and recent-activity queries |
