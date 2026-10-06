@@ -42,7 +42,7 @@ Everything not listed in the pricing table above is free, including:
 - `GET /api/stats`, `GET /api/stats/monthly` — statistics
 - `GET /api/artists/ranking`, `GET /api/artists/ranking/year/:year` — rankings
 - `GET /api/artists`, `GET /api/artists/:id`, `GET /api/artists/by-name/:name`
-- `GET /api/artists/:id/performances`, `GET /api/artists/:id/stats`
+- `GET /api/artists/:id/performances`, `GET /api/artists/:id/stats`, `GET /api/performances`
 - `GET /api/shows`, `GET /api/residents/current`, `GET /api/years`, `GET /api/period`
 - `GET /api/flyers` — the flyer archive **index** (only the PDF files themselves are paid)
 - `GET /llms.txt`, `GET /llms-full.txt`, `GET /openapi.json`

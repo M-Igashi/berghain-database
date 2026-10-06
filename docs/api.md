@@ -40,10 +40,21 @@ async function berghainHistory(name) {
 
 Each performance carries two links: `url` is the original berghain.berlin listing (or the source flyer PDF for 2004–2009), and `https://berghain.ravers.workers.dev/shows/{event_id}` is the full lineup of that night on this site.
 
-### Keep it light
+### Sync many artists
 
-- **Match many artists in one request.** `GET /api/artists?limit=5000` returns every artist (about 270 KB). Match your names against it locally instead of looking each one up.
-- **Store artist ids.** An id only changes when a duplicate entry is merged into another one. If a stored id returns 404, resolve the name again.
+For a catalog of artists, two requests cover everything:
+
+```bash
+# 1. Every artist (about 270 KB): match your names against it locally and store the ids
+curl "https://berghain.ravers.workers.dev/api/artists?limit=5000"
+
+# 2. Histories for up to 200 artists at once, keyed by artist id
+curl "https://berghain.ravers.workers.dev/api/performances?artist_ids=13,1416,2240"
+```
+
+An artist id only changes when a duplicate entry is merged into another one. Such an id comes back from step 2 as an empty list (or as 404 from the single-artist endpoints); match that name again against the list from step 1.
+
+### Keep it light
 - **Refresh daily at most.** Lineups are imported in monthly batches, plus occasional corrections, so a daily rebuild is always current.
 - **Send `If-None-Match`.** Unchanged responses come back as an empty `304`.
 - **Need everything at once?** The [bulk exports](#bulk-export-paid-via-x402) return all artists, events or performances in a single file.
@@ -61,7 +72,7 @@ The data is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4
 
 ### Missing something?
 
-If a different endpoint would make your integration simpler, for example fetching several artists in one request, [open a feature request](https://github.com/M-Igashi/berghain-database/issues/new?template=feature_request.md).
+If a different endpoint would make your integration simpler, [open a feature request](https://github.com/M-Igashi/berghain-database/issues/new?template=feature_request.md).
 
 ## Statistics
 
@@ -194,7 +205,48 @@ Every performance of an artist, newest first.
 ]
 ```
 
-`event_id` is the official berghain.berlin id, or a synthetic `YYYYMMDD` id for 2004–2009 flyer-era nights. `venue` is either `Berghain` or `Panorama Bar`.
+`event_id` is the official berghain.berlin id, or a synthetic `YYYYMMDD` id for 2004–2009 flyer-era nights. `venue` is either `Berghain` or `Panorama Bar`. `date` is a display string whose format varies between eras; use `iso_date` for sorting and parsing.
+
+### `GET /api/performances`
+
+Performance histories for several artists in one request.
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| `artist_ids` | string | required | Comma-separated artist ids, at most 200 |
+
+```bash
+curl "https://berghain.ravers.workers.dev/api/performances?artist_ids=13,1416"
+```
+
+The response is an object keyed by artist id. Each value is the same list that `/api/artists/:id/performances` returns for that artist, newest first. Ids that do not exist (for example after a duplicate entry was merged) map to an empty list. A missing, non-numeric or oversized `artist_ids` returns 400.
+
+```json
+{
+  "13": [
+    {
+      "event_id": 80747,
+      "title": "Klubnacht",
+      "date": "Saturday 17.10.2026 start 23:59",
+      "iso_date": "2026-10-17",
+      "url": "https://www.berghain.berlin/en/event/80747/",
+      "venue": "Berghain",
+      "artist_name": "Rødhåd"
+    }
+  ],
+  "1416": [
+    {
+      "event_id": 66512,
+      "title": "Klubnacht",
+      "date": "22.02.2020",
+      "iso_date": "2020-02-22",
+      "url": "https://www.berghain.berlin/de/event/66512/",
+      "venue": "Berghain",
+      "artist_name": "Marcus L"
+    }
+  ]
+}
+```
 
 ## Rankings
 
