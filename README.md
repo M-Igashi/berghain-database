@@ -77,6 +77,7 @@ curl "https://berghain.ravers.workers.dev/api/residents/current"
 | `GET /api/artists?search=` | Search artists by name |
 | `GET /api/artists/by-name/:name` | Exact artist lookup (URL-encoded name) |
 | `GET /api/artists/:id/performances` | Artist's full performance history |
+| `GET /api/performances?artist_ids=` | Performance histories for up to 200 artists in one request |
 | `GET /api/residents/current` | Current active resident DJs |
 | `GET /api/shows` | Browse all events |
 | `GET /api/flyers` | Index of the 2004–2009 flyer archive |
