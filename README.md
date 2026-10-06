@@ -41,7 +41,7 @@ The **2004–2009** era is reconstructed from the official monthly flyer archive
 
 | Document | Description |
 | --- | --- |
-| [API Reference](docs/api.md) | Full endpoint documentation with examples |
+| [API Reference](docs/api.md) | Integration guide, attribution, and full endpoint documentation |
 | [Architecture](docs/architecture.md) | System design, caching strategy, and performance |
 | [x402 & AI Access](docs/x402-ai-paywall.md) | Freemium access model and x402 micropayments |
 | [Database Schema](docs/schema.md) | Table definitions and relationships |
@@ -81,6 +81,8 @@ curl "https://berghain.ravers.workers.dev/api/residents/current"
 | `GET /api/shows` | Browse all events |
 | `GET /api/flyers` | Index of the 2004–2009 flyer archive |
 | `GET /api/export/*` | Bulk export — JSON/CSV ($0.10 via x402) |
+
+Artist responses include `page_url`, the artist's page on this site. If you show an artist's history on your own site, please link to it (see [Attribution](docs/api.md#attribution)). The [Integration Guide](docs/api.md#integration-guide) shows how to do this in two requests per artist.
 
 See [docs/api.md](docs/api.md) for the complete API reference.
 
@@ -140,7 +142,7 @@ This database is a labor of love, maintained for the global Techno community.
 ## License
 
 - **Code**: [MIT](LICENSE)
-- **Data**: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — free to use, share, and adapt; please credit [berghain.ravers.workers.dev](https://berghain.ravers.workers.dev) as the source.
+- **Data**: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Free to use, share, and adapt, including commercially, as long as you credit **Berghain Klubnacht Database** with a link to [berghain.ravers.workers.dev](https://berghain.ravers.workers.dev). See [Attribution](docs/api.md#attribution).
 
 ---
 

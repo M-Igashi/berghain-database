@@ -39,6 +39,8 @@ One exception: when a flyer's **own billing** prints the `aka` (e.g. the 2007-10
 | **Daniel Paul Cortez aka Ghetto** | Minneapolis DJ (ex-*DJ Ghetto*, DVS1's Future Classic resident); merged the *Ghetto*, *Daniel Paul aka Ghetto* and *Daniel Paul Cortez* entries |
 | **Sven von Thülen aka Sven.vt** | Merged the flyer-era *Sven.vt* billing (de:bug, 2004–2009) into Sven von Thülen |
 | **Jackmate aka Soulphiction** | Michel Baumann (Stuttgart, Philpot); the 2007-10-27 flyer billed *"Jackmate aka Soulphiction"* verbatim |
+| **Talismann aka Makam** | Guy Blanken (confirmed via his ADE artist profile); the 2019-11-30 set billed as *Talisman* was also his. The 2012 FC Snax United *Talisman* is a different act and stays separate |
+| **Don Williams aka Oracy** | Thomas Wendel (Mojuba / A.R.T.less); Don Williams is his techno name, Oracy his house alias. Discogs lists both under the same real name |
 
 ### Intentionally kept separate
 
@@ -78,6 +80,11 @@ Groups whose members have **no** solo history in the data (e.g. **Âme**, **Tale
 | **Roog Unit** | Ø [Phase] · Luke Slater |
 | **Civil Duty** | Shawn O'Sullivan (aka 400PPM) · Beau Wanzer |
 | **Zander VT** | Sven von Thülen · Fritz Zander (their BPitch Control duo, active to ~2012) |
+| **Homm & Popoviciu** | Markus Homm · Mihai Popoviciu |
+| **Hemmann & Kaden** | Marek Hemmann · Mathias Kaden |
+| **Dapayk & Padberg** | Dapayk · Eva Padberg |
+| **Van Rivers + The Subliminal Kid** | Van Rivers · The Subliminal Kid |
+| **Dense & Pika** | Glimpse · Chris Spero |
 
 > **Label showcases & DJ teams** (e.g. Dekmantel Soundsystem, Innervisions, M>O>S, Dial allstars, Raw Series) are kept as their own billed acts — they genuinely played that slot. They're only broken into members when the lineup actually names the DJs, as with *Highgrade* above.
 
