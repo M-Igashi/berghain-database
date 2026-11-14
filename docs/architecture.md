@@ -141,7 +141,7 @@ D1 bills rows *scanned*, not rows returned, and a crawler sweep visits every URL
 - Every page is rendered on the server from a shared layout: design tokens, header, artist search, and footer are defined once.
 - The home page is rendered from the same cached data the API serves (stats, upcoming lineups, residents, rankings, events). The year and floor filters fetch the public API.
 - Bars are split by floor throughout the site: white for the Berghain floor, orange for Panorama Bar.
-- Fonts, styles, and scripts are all served by the Worker itself, and charts are plain CSS. The only third-party request on the site is Cloudflare Web Analytics on the home page, which is cookieless.
+- Fonts, styles, and scripts are all served by the Worker itself, and charts are plain CSS. No page makes a third-party request: there are no external fonts, analytics, or tracking scripts.
 
 ## Content Negotiation
 
@@ -172,7 +172,7 @@ Content-Signal: ai-train=no, search=yes, ai-input=yes
 - **Secrets** (admin key, wallet address, payment facilitator credentials) are stored as Worker secrets and never in the repository.
 - **Admin routes** require a key sent in a header, compared in constant time. The key is not accepted in the query string.
 - **The paywall ignores User-Agent**, so it cannot be bypassed by pretending to be a browser.
-- **No cookies and no accounts.** Visitor data is limited to cookieless page view counts on the home page (Cloudflare Web Analytics).
+- **No visitor data** is collected: no cookies, no accounts, no analytics or tracking scripts.
 - **Security review**: code and configuration changes are reviewed with [Claude Code](https://claude.com/claude-code) running Claude Fable 5.2.
 
 ## Performance Targets
