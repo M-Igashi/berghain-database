@@ -1,6 +1,6 @@
 # Database Schema
 
-The database uses Cloudflare D1 (SQLite) with three core tables.
+The database uses Cloudflare D1 (SQLite) with three core tables and one derived table.
 
 ## Entity Relationship
 
@@ -55,6 +55,17 @@ The database uses Cloudflare D1 (SQLite) with three core tables.
 | `event_id` | INTEGER | Foreign key → `events(id)` |
 | `artist_id` | INTEGER | Foreign key → `artists(id)` |
 | `venue` | TEXT | Either `"Berghain"` or `"Panorama Bar"` |
+
+### `artist_coperformers` (derived)
+
+The five artists each artist has shared the most nights with, shown as "most shared bills" on artist pages. It is rebuilt from `performances` after every data change, so it holds no information of its own.
+
+| Column | Type | Description |
+| --- | --- | --- |
+| `artist_id` | INTEGER | The artist (primary key together with `pos`) |
+| `pos` | INTEGER | Rank of the co-performer, 1 to 5 |
+| `co_artist_id` | INTEGER | The other artist |
+| `shared` | INTEGER | Number of nights both played |
 
 ## Indexes
 

@@ -27,21 +27,46 @@ The **2004–2009** era is reconstructed from the official monthly flyer archive
 
 ## Tech Stack
 
-| Component | Technology |
-| --- | --- |
-| Runtime | [Cloudflare Workers](https://workers.cloudflare.com/) |
-| Framework | [Hono](https://hono.dev/) (TypeScript) |
-| Database | Cloudflare D1 (SQLite) |
-| Cache | 3-tier: Memory → Workers KV → D1 |
-| Storage | Cloudflare R2 (flyer PDFs, QR codes) |
-| Analytics | Cloudflare Analytics Engine (crawl stats & revenue tracking) |
-| Payments | [x402 protocol](https://x402.org) — USDC on Solana mainnet via [Coinbase CDP](https://docs.cdp.coinbase.com/) facilitator |
+Everything runs on Cloudflare's edge. There is no origin server, no container, and no frontend framework.
+
+### Platform
+
+| Layer | Technology | Role |
+| --- | --- | --- |
+| Runtime | [Cloudflare Workers](https://workers.cloudflare.com/) | One Worker serves the API and every page |
+| Language | TypeScript 7 | |
+| Framework | [Hono](https://hono.dev/) 4 | Routing and middleware |
+| Database | Cloudflare D1 (SQLite) | Artists, events, performances |
+| Cache | In-memory → Workers KV → D1 | 3-tier response cache |
+| Storage | Cloudflare R2, Workers Static Assets | Flyer PDFs and QR codes; font, icons, and share image |
+| Scheduling | Cron Trigger | Daily cache warmup |
+
+### Frontend
+
+| Layer | Technology | Role |
+| --- | --- | --- |
+| Rendering | Server-rendered HTML from TypeScript templates | No client framework, no build step |
+| Typography | Self-hosted JetBrains Mono | No Google Fonts or other third-party requests on any content page |
+| AI-readable | Markdown for every page via `Accept: text/markdown`, `llms.txt`, OpenAPI 3.1 | Built for agents as well as browsers |
+
+### Operations
+
+| Layer | Technology | Role |
+| --- | --- | --- |
+| Payments | [x402 protocol](https://x402.org) (`@x402/hono`) | USDC on Solana mainnet through the [Coinbase CDP](https://docs.cdp.coinbase.com/) facilitator |
+| Analytics | Cloudflare Analytics Engine | AI crawler stats and x402 revenue. No visitor tracking |
+| Observability | Workers Logs and Traces | |
+| Search indexing | IndexNow, XML sitemap, RSS | |
+| Deployment | Wrangler | Manual deploys |
+| Security review | [Claude Code](https://claude.com/claude-code) (Claude Fable 5.2) | Reviews of code and configuration changes |
+
+See [Architecture](docs/architecture.md) for how the pieces fit together.
 
 ## Documentation
 
 | Document | Description |
 | --- | --- |
-| [API Reference](docs/api.md) | Integration guide, attribution, and full endpoint documentation |
+| [API Reference](docs/api.md) | Quick start, endpoint index, integration guide, attribution, and every endpoint in detail |
 | [Architecture](docs/architecture.md) | System design, caching strategy, and performance |
 | [x402 & AI Access](docs/x402-ai-paywall.md) | Freemium access model and x402 micropayments |
 | [Database Schema](docs/schema.md) | Table definitions and relationships |
@@ -52,49 +77,62 @@ The **2004–2009** era is reconstructed from the official monthly flyer archive
 
 **Base URL**: `https://berghain.ravers.workers.dev`
 
-The API is **free and open for everyone** — no accounts, no API keys, CORS enabled. Only two things are paid, via the [x402 protocol](docs/x402-ai-paywall.md), for **all** requests: bulk exports (`/api/export/*`, $0.10) and historical flyer PDFs (`/flyers/*`, $0.01).
+The API is **free and open for everyone**: no accounts, no API keys, CORS enabled. Only two things are paid, via the [x402 protocol](docs/x402-ai-paywall.md), for **all** requests: bulk exports (`/api/export/*`, $0.10) and historical flyer PDFs (`/flyers/*`, $0.01).
 
 ```bash
-# Get top performers of all time
+# Who plays next, floor by floor
+curl "https://berghain.ravers.workers.dev/api/shows/upcoming"
+
+# Top performers of all time
 curl "https://berghain.ravers.workers.dev/api/artists/ranking?limit=20"
 
 # Search for any artist
 curl "https://berghain.ravers.workers.dev/api/artists?search=ellen+allien"
 
-# Get an artist's complete performance history
+# An artist's complete performance history
 curl "https://berghain.ravers.workers.dev/api/artists/16/performances"
 
-# Fetch current active residents
+# Current residents, split by floor
 curl "https://berghain.ravers.workers.dev/api/residents/current"
 ```
 
-### Key Endpoints
+### Endpoints
 
-| Endpoint | Description |
-| --- | --- |
-| `GET /api/stats` | Database statistics and venue breakdown |
-| `GET /api/artists/ranking` | Top artists by performance count |
-| `GET /api/artists?search=` | Search artists by name |
-| `GET /api/artists/by-name/:name` | Exact artist lookup (URL-encoded name) |
-| `GET /api/artists/:id/performances` | Artist's full performance history |
-| `GET /api/performances?artist_ids=` | Performance histories for up to 200 artists in one request |
-| `GET /api/residents/current` | Current active resident DJs |
-| `GET /api/shows` | Browse all events |
-| `GET /api/flyers` | Index of the 2004–2009 flyer archive |
-| `GET /api/export/*` | Bulk export — JSON/CSV ($0.10 via x402) |
+| | Endpoint | Description |
+| --- | --- | --- |
+| **Artists** | `GET /api/artists?search=` | List or search artists (`limit=0` for all) |
+| | `GET /api/artists/:id` | One artist by id |
+| | `GET /api/artists/by-name/:name` | One artist by exact name (URL-encoded) |
+| | `GET /api/artists/:id/stats` | Career statistics |
+| | `GET /api/artists/:id/performances` | Full performance history |
+| | `GET /api/performances?artist_ids=` | Histories of up to 20 artists in one request |
+| **Rankings** | `GET /api/artists/ranking` | All-time ranking, optionally per floor |
+| | `GET /api/artists/ranking/year/:year` | Ranking for one year |
+| | `GET /api/residents/current` | Most active artists of the past 3 years, split by floor |
+| **Events** | `GET /api/shows` | All nights, filterable by year and month |
+| | `GET /api/shows/upcoming` | Upcoming nights with the lineup of each floor |
+| **Reference** | `GET /api/stats`, `GET /api/stats/monthly` | Totals, floor split, events per month |
+| | `GET /api/years`, `GET /api/period` | Years covered, first and last date |
+| | `GET /api/flyers` | Index of the 2004–2009 flyer archive |
+| **Paid** | `GET /api/export/*` | Bulk export, JSON or CSV ($0.10 via x402) |
+| | `GET /flyers/*.pdf` | Original flyer PDFs ($0.01 via x402) |
 
 Artist responses include `page_url`, the artist's page on this site. If you show an artist's history on your own site, please link to it (see [Attribution](docs/api.md#attribution)). The [Integration Guide](docs/api.md#integration-guide) shows how to do this in two requests per artist.
+
+Building something and missing an endpoint? Several of these exist because someone asked. [Open a feature request](https://github.com/M-Igashi/berghain-database/issues/new?template=feature_request.md) before you start scraping: one request shaped for your use case is easier for you and lighter on the database.
 
 See [docs/api.md](docs/api.md) for the complete API reference.
 
 ### Content Negotiation & AI Discovery
 
-All HTML pages return structured Markdown when requested with `Accept: text/markdown`, optimized for AI/LLM consumption. Machine-readable entry points:
+All content pages return structured Markdown when requested with `Accept: text/markdown`, optimized for AI/LLM consumption. Machine-readable entry points:
 
-- [`/llms.txt`](https://berghain.ravers.workers.dev/llms.txt) and [`/llms-full.txt`](https://berghain.ravers.workers.dev/llms-full.txt) — LLM discovery files
-- [`/openapi.json`](https://berghain.ravers.workers.dev/openapi.json) — OpenAPI 3 specification with x402 price annotations
-- [`/.well-known/x402`](https://berghain.ravers.workers.dev/.well-known/x402) — x402 payment manifest
-- `/.well-known/agentic-capabilities.json` — agent capability descriptor
+| Entry point | Description |
+| --- | --- |
+| [`/llms.txt`](https://berghain.ravers.workers.dev/llms.txt), [`/llms-full.txt`](https://berghain.ravers.workers.dev/llms-full.txt) | LLM discovery files |
+| [`/openapi.json`](https://berghain.ravers.workers.dev/openapi.json) | OpenAPI 3.1 specification with x402 price annotations |
+| [`/.well-known/x402`](https://berghain.ravers.workers.dev/.well-known/x402) | x402 payment manifest |
+| `/.well-known/agentic-capabilities.json` | Agent capability descriptor |
 
 ## Access Model: Freemium + x402
 
