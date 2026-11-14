@@ -77,7 +77,7 @@ See [Architecture](docs/architecture.md) for how the pieces fit together.
 
 **Base URL**: `https://berghain.ravers.workers.dev`
 
-The API is **free and open for everyone**: no accounts, no API keys, CORS enabled. Only two things are paid, via the [x402 protocol](docs/x402-ai-paywall.md), for **all** requests: bulk exports (`/api/export/*`, $0.10) and batch requests for more than 20 artists (`/api/performances`, $0.01).
+The API is **free and open for everyone**: no accounts, no API keys, CORS enabled. Only one thing is paid, via the [x402 protocol](docs/x402-ai-paywall.md), for **all** requests: bulk exports (`/api/export/*`, $0.10).
 
 ```bash
 # Who plays next, floor by floor
@@ -105,7 +105,7 @@ curl "https://berghain.ravers.workers.dev/api/residents/current"
 | | `GET /api/artists/by-name/:name` | One artist by exact name (URL-encoded) |
 | | `GET /api/artists/:id/stats` | Career statistics |
 | | `GET /api/artists/:id/performances` | Full performance history |
-| | `GET /api/performances?artist_ids=` | Histories of up to 20 artists in one request (21 to 200 for $0.01) |
+| | `GET /api/performances?artist_ids=` | Histories of up to 200 artists in one request |
 | **Rankings** | `GET /api/artists/ranking` | All-time ranking, optionally per floor |
 | | `GET /api/artists/ranking/year/:year` | Ranking for one year |
 | | `GET /api/residents/current` | Most active artists of the past 3 years, split by floor |
@@ -135,22 +135,20 @@ All content pages return structured Markdown when requested with `Accept: text/m
 
 ## Access Model: Freemium + x402
 
-Almost everything is **free for everyone, including AI crawlers**. This is deliberate, to maximize the archive's visibility in AI search. The price follows what a request costs the database, not the kind of content.
+Almost everything is **free for everyone, including AI crawlers**. This is deliberate, to maximize the archive's visibility in AI search. Only dumping a whole table costs money.
 
 ```
 Request
-  ├── /api/export/*                        → x402 paywall (all requests)
-  ├── /api/performances with 21–200 ids    → x402 paywall (all requests)
+  ├── /api/export/*    → x402 paywall (all requests)
   │       ├── no payment  → HTTP 402 Payment Required
   │       └── paid        → HTTP 200
-  └── everything else                      → free
+  └── everything else  → free
 ```
 
 | What | Price | Applies to |
 | --- | --- | --- |
 | Bulk exports (`/api/export/artists\|events\|performances`, JSON/CSV) | $0.10 | all requests |
-| Batch performance histories for 21 to 200 artists (`/api/performances`) | $0.01 | all requests |
-| Everything else (stats, rankings, artist and event data, batches up to 20 artists, HTML pages) | Free | everyone |
+| Everything else (stats, rankings, artist and event data, batch lookups, HTML pages) | Free | everyone |
 
 Payments settle in **USDC on Solana or Base** through the [Coinbase Developer Platform (CDP)](https://docs.cdp.coinbase.com/) facilitator, using x402 v2. The original flyer PDFs are not sold or hosted here: `/api/flyers` links to the official copies on berghain.berlin. AI crawler activity, free and paid, is tracked via Cloudflare Analytics Engine and published on the [public transparency dashboard](https://berghain.ravers.workers.dev/dashboard/crawl-stats).
 

@@ -55,7 +55,7 @@ Cloudflare edge network
 | Typography | Self-hosted JetBrains Mono | No third-party font requests |
 | Markdown | A Markdown template per page | Served for `Accept: text/markdown` |
 | API description | OpenAPI 3.1, `llms.txt`, `llms-full.txt` | Machine-readable discovery |
-| Payments | x402 protocol v2 (`@x402/hono`) with the Coinbase CDP facilitator | USDC micropayments on Solana or Base for bulk exports and large batch requests |
+| Payments | x402 protocol v2 (`@x402/hono`) with the Coinbase CDP facilitator | USDC micropayments on Solana or Base for bulk exports |
 | Analytics | Cloudflare Analytics Engine, read through the Analytics SQL binding | AI crawler stats and revenue |
 | Search indexing | IndexNow, XML sitemap, RSS feed | |
 
@@ -77,10 +77,10 @@ Requests pass through the following middleware in order:
 | 2 | Crawler stats | all | Detects AI crawlers by User-Agent and writes one event to Analytics Engine |
 | 3 | CORS | all | Allows cross-origin requests from any origin |
 | 4 | Citability and ETag | all | Adds canonical URL and data source headers. Adds an `ETag` to API and Markdown responses so `If-None-Match` revalidation returns an empty `304` |
-| 5 | x402 paywall | `/api/export/*`, and `/api/performances` with more than 20 artist ids | Requires payment from **every** requester. The 402 response carries the requirements in the `PAYMENT-REQUIRED` header, with discovery metadata for x402 marketplaces |
+| 5 | x402 paywall | `/api/export/*` | Requires payment from **every** requester. The 402 response carries the requirements in the `PAYMENT-REQUIRED` header, with discovery metadata for x402 marketplaces |
 | 6 | Admin auth | `/admin/*` | Requires the admin key |
 
-The paywall applies regardless of who is asking, and its price follows what a request costs the database. Every other route is free for everyone, including AI crawlers. See [x402 & AI Access](x402-ai-paywall.md).
+The paywall applies regardless of who is asking. Every other route is free for everyone, including AI crawlers. See [x402 & AI Access](x402-ai-paywall.md).
 
 ## Cache System
 

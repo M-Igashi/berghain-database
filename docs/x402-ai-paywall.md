@@ -4,20 +4,16 @@
 
 The Berghain Database runs a **freemium** model. Almost the entire API is free for everyone (humans, search engines, **and AI crawlers**), which is deliberate: open access maximizes the archive's visibility in AI search and answer engines.
 
-The price follows what a request costs the database, not the kind of content. Two things are paid, via the [x402 protocol](https://x402.org), and they are paid by **every** requester (not just AI crawlers):
-
-- **Bulk exports**: full-table dumps at `/api/export/*`
-- **Large batches**: `/api/performances` with more than 20 artist ids in one request
+Only one thing is paid, via the [x402 protocol](https://x402.org), and it is paid by **every** requester (not just AI crawlers): **bulk exports**, the full-table dumps at `/api/export/*`.
 
 ## How It Works
 
 ```
 Request
-  ├── /api/export/*                        → x402 payment middleware (all requests)
-  ├── /api/performances with 21–200 ids    → x402 payment middleware (all requests)
+  ├── /api/export/*    → x402 payment middleware (all requests)
   │       ├── no payment  → HTTP 402, requirements in the PAYMENT-REQUIRED header
   │       └── valid PAYMENT-SIGNATURE → HTTP 200 (access granted)
-  └── everything else                      → free
+  └── everything else  → free
 ```
 
 AI crawlers are still **detected** by User-Agent. This is not to charge them for normal endpoints, but to record activity for the public transparency dashboard and to note when a crawler pays. The paywall itself ignores User-Agent.
@@ -29,9 +25,8 @@ AI crawlers are still **detected** by User-Agent. This is not to charge them for
 | `GET /api/export/artists` | $0.10 | all requests |
 | `GET /api/export/events` | $0.10 | all requests |
 | `GET /api/export/performances` | $0.10 | all requests |
-| `GET /api/performances?artist_ids=` with 21 to 200 ids | $0.01 | all requests |
 
-Export endpoints support `?format=json` (default) or `?format=csv`. `/api/performances` with up to 20 ids is free.
+Export endpoints support `?format=json` (default) or `?format=csv`.
 
 ### Flyer PDFs are not sold
 
@@ -46,7 +41,7 @@ Everything not listed in the pricing table above is free, including:
 - `GET /api/artists/ranking`, `GET /api/artists/ranking/year/:year`
 - `GET /api/artists`, `GET /api/artists/:id`, `GET /api/artists/by-name/:name`
 - `GET /api/artists/:id/performances`, `GET /api/artists/:id/stats`
-- `GET /api/performances` with up to 20 artist ids
+- `GET /api/performances` (up to 200 artist ids per request)
 - `GET /api/shows`, `GET /api/shows/upcoming`, `GET /api/residents/current`, `GET /api/years`, `GET /api/period`
 - `GET /api/flyers`, `GET /flyers/:filename` (redirect to the official PDF)
 - `GET /llms.txt`, `GET /llms-full.txt`, `GET /openapi.json`
