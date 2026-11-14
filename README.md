@@ -46,7 +46,7 @@ Everything runs on Cloudflare's edge. There is no origin server, no container, a
 | Layer | Technology | Role |
 | --- | --- | --- |
 | Rendering | Server-rendered HTML from TypeScript templates | No client framework, no build step |
-| Typography | Self-hosted JetBrains Mono | No Google Fonts or other third-party requests on any content page |
+| Typography | Self-hosted JetBrains Mono | No Google Fonts or other third-party font requests |
 | AI-readable | Markdown for every page via `Accept: text/markdown`, `llms.txt`, OpenAPI 3.1 | Built for agents as well as browsers |
 
 ### Operations
@@ -54,7 +54,7 @@ Everything runs on Cloudflare's edge. There is no origin server, no container, a
 | Layer | Technology | Role |
 | --- | --- | --- |
 | Payments | [x402 protocol](https://x402.org) v2 (`@x402/hono`) | USDC on Solana or Base through the [Coinbase CDP](https://docs.cdp.coinbase.com/) facilitator |
-| Analytics | Cloudflare Analytics Engine | AI crawler stats and x402 revenue. No visitor tracking |
+| Analytics | Cloudflare Analytics Engine | AI crawler stats and x402 revenue |
 | Observability | Workers Logs and Traces | |
 | Search indexing | IndexNow, XML sitemap, RSS | |
 | Deployment | Wrangler | Manual deploys |
