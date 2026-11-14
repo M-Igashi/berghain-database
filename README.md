@@ -168,7 +168,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on submitting cor
 
 ## Privacy
 
-**No ads. No cookies. No trackers. We never fuck your privacy.** The site sets zero cookies, runs no advertising, and embeds no third-party analytics or tracking scripts. AI-crawler statistics are aggregated server-side only — nothing about human visitors is collected, profiled, or sold.
+**No ads. No cookies. No personal tracking. We never fuck your privacy.** The site sets zero cookies, runs no advertising, and loads no third-party fonts. The only outside script is Cloudflare Web Analytics on the home page, which counts page views without cookies and without identifying anyone. AI crawler statistics are aggregated server-side only. Nothing about individual visitors is collected, profiled, or sold.
 
 ## Support
 
