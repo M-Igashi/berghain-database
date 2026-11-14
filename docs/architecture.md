@@ -21,15 +21,15 @@ Cloudflare edge network
 │     ┌─────────────┼──────────────┬───────────────┐             │
 │     ▼             ▼              ▼               ▼             │
 │  Response      R2 bucket     Static Assets   Analytics Engine  │
-│  cache         flyer PDFs,   font, icons,    AI crawler stats, │
-│  memory        QR codes      share image     x402 revenue      │
+│  cache         QR codes      font, icons,    AI crawler stats, │
+│  memory                      share image     x402 revenue      │
 │    → KV                                                        │
 │    → D1                                                        │
 └────────────────────────────────────────────────────────────────┘
        ▲                                  │
        │ Cron Trigger (daily warmup)       ▼
                               Coinbase CDP facilitator
-                              (x402 payments, USDC on Solana)
+                              (x402: USDC on Solana or Base)
 ```
 
 ## Tech Stack
@@ -43,7 +43,7 @@ Cloudflare edge network
 | Framework | Hono 4 | HTTP routing and middleware |
 | Database | Cloudflare D1 (SQLite) | Source of truth: artists, events, performances, precomputed co-performers |
 | Cache | In-memory `Map` and Workers KV | Response cache in front of D1 |
-| Object storage | Cloudflare R2 | Flyer PDFs and QR codes |
+| Object storage | Cloudflare R2 | QR codes |
 | Static assets | Workers Static Assets | Font files, icons, and the share image |
 | Scheduling | Cron Trigger | Daily cache warmup at 03:00 UTC |
 
@@ -55,7 +55,7 @@ Cloudflare edge network
 | Typography | Self-hosted JetBrains Mono | No third-party font requests |
 | Markdown | A Markdown template per page | Served for `Accept: text/markdown` |
 | API description | OpenAPI 3.1, `llms.txt`, `llms-full.txt` | Machine-readable discovery |
-| Payments | x402 protocol (`@x402/hono`) with the Coinbase CDP facilitator | USDC micropayments on Solana mainnet for exports and flyer PDFs |
+| Payments | x402 protocol v2 (`@x402/hono`) with the Coinbase CDP facilitator | USDC micropayments on Solana or Base for bulk exports and large batch requests |
 | Analytics | Cloudflare Analytics Engine, read through the Analytics SQL binding | AI crawler stats and revenue. Human visitors are not tracked |
 | Search indexing | IndexNow, XML sitemap, RSS feed | |
 
@@ -77,11 +77,10 @@ Requests pass through the following middleware in order:
 | 2 | Crawler stats | all | Detects AI crawlers by User-Agent and writes one event to Analytics Engine |
 | 3 | CORS | all | Allows cross-origin requests from any origin |
 | 4 | Citability and ETag | all | Adds canonical URL and data source headers. Adds an `ETag` to API and Markdown responses so `If-None-Match` revalidation returns an empty `304` |
-| 5 | x402 paywall | `/api/export/*`, `/flyers/*` | Requires payment from **every** requester |
-| 6 | x402 signal | `/api/*`, `/current-residents` | Free responses to AI crawlers carry x402 discovery headers, so agents can find the paid routes |
-| 7 | Admin auth | `/admin/*` | Requires the admin key |
+| 5 | x402 paywall | `/api/export/*`, and `/api/performances` with more than 20 artist ids | Requires payment from **every** requester. The 402 response carries the requirements in the `PAYMENT-REQUIRED` header, with discovery metadata for x402 marketplaces |
+| 6 | Admin auth | `/admin/*` | Requires the admin key |
 
-The paywall applies to exports and flyer PDFs regardless of who is asking. Every other route is free for everyone, including AI crawlers. See [x402 & AI Access](x402-ai-paywall.md).
+The paywall applies regardless of who is asking, and its price follows what a request costs the database. Every other route is free for everyone, including AI crawlers. See [x402 & AI Access](x402-ai-paywall.md).
 
 ## Cache System
 

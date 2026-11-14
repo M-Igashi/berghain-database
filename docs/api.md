@@ -6,7 +6,7 @@
 | --- | --- |
 | **Access** | Free and open. No account, no API key, CORS enabled for every origin |
 | **Format** | JSON over HTTPS, `GET` only |
-| **Paid** | Only bulk exports ($0.10) and flyer PDFs ($0.01), via the [x402 protocol](x402-ai-paywall.md) |
+| **Paid** | Only bulk exports ($0.10) and batch requests for more than 20 artists ($0.01), via the [x402 protocol](x402-ai-paywall.md) |
 | **License** | Data is [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See [Attribution](#attribution) |
 | **Machine-readable** | [`/openapi.json`](https://berghain.ravers.workers.dev/openapi.json) (OpenAPI 3.1), [`/llms.txt`](https://berghain.ravers.workers.dev/llms.txt) |
 
@@ -53,7 +53,7 @@ All of these are free.
 | [`GET /api/artists/by-name/:name`](#get-apiartistsby-namename) | One artist by exact name |
 | [`GET /api/artists/:id/stats`](#get-apiartistsidstats) | Career statistics of one artist |
 | [`GET /api/artists/:id/performances`](#get-apiartistsidperformances) | Every night one artist played |
-| [`GET /api/performances?artist_ids=`](#get-apiperformances) | Histories of up to 20 artists in one request |
+| [`GET /api/performances?artist_ids=`](#get-apiperformances) | Histories of up to 20 artists in one request (21 to 200 for $0.01) |
 | [`GET /api/artists/ranking`](#get-apiartistsranking) | All-time ranking, optionally per floor |
 | [`GET /api/artists/ranking/year/:year`](#get-apiartistsrankingyearyear) | Ranking for one year |
 | [`GET /api/shows`](#get-apishows) | All nights, newest first |
@@ -61,7 +61,7 @@ All of these are free.
 | [`GET /api/residents/current`](#get-apiresidentscurrent) | Most active artists of the past 3 years, split by floor |
 | [`GET /api/years`](#get-apiyears) | Years covered |
 | [`GET /api/period`](#get-apiperiod) | First and last event date |
-| [`GET /api/flyers`](#get-apiflyers) | Index of the 2004–2009 flyer archive |
+| [`GET /api/flyers`](#get-apiflyers) | Index of the 2004–2009 flyer archive, with links to the official PDFs |
 | [`GET /api/public/crawl-summary`](#get-apipubliccrawl-summary) | Aggregated AI crawler statistics |
 
 ## Conventions
@@ -74,8 +74,8 @@ Successful responses are JSON with status `200`. Errors are JSON objects with a 
 | --- | --- |
 | `200` | Success. Unknown years and ids inside a list request give an empty list, not an error |
 | `304` | Unchanged since the `ETag` you sent in `If-None-Match` (empty body) |
-| `400` | Invalid parameter, for example `month=13` or more than 20 `artist_ids` |
-| `402` | Payment required (bulk exports and flyer PDFs only) |
+| `400` | Invalid parameter, for example `month=13` or more than 200 `artist_ids` |
+| `402` | Payment required (bulk exports, and batch requests for more than 20 artists) |
 | `404` | Artist not found |
 | `500` | Server error |
 
@@ -146,7 +146,7 @@ curl "https://berghain.ravers.workers.dev/api/artists?limit=0"
 curl "https://berghain.ravers.workers.dev/api/performances?artist_ids=13,1416,2240"
 ```
 
-Send your ids in chunks of 20. For a catalog of several hundred artists or more, the [performances export](#bulk-exports) returns everything in one file instead.
+Up to 20 ids per request are free, so send your ids in chunks of 20. If you would rather make fewer requests, 21 to 200 ids in one request cost $0.01 via [x402](x402-ai-paywall.md), and the [performances export](#bulk-exports) returns everything in one file for $0.10.
 
 An artist id only changes when a duplicate entry is merged into another one. Such an id comes back from step 2 as an empty list (or as 404 from the single-artist endpoints). Match that name again against the list from step 1.
 
@@ -312,13 +312,13 @@ Performance histories for several artists in one request.
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
-| `artist_ids` | string | required | Comma-separated artist ids, **at most 20** |
+| `artist_ids` | string | required | Comma-separated artist ids. **Up to 20 are free.** 21 to 200 cost $0.01 via [x402](x402-ai-paywall.md) |
 
 ```bash
 curl "https://berghain.ravers.workers.dev/api/performances?artist_ids=13,1416"
 ```
 
-The response is an object keyed by artist id. Each value is the same list that `/api/artists/:id/performances` returns for that artist, newest first. Ids that do not exist (for example after a duplicate entry was merged) map to an empty list. A missing or non-numeric `artist_ids`, or more than 20 ids, returns `400`.
+The response is an object keyed by artist id. Each value is the same list that `/api/artists/:id/performances` returns for that artist, newest first. Ids that do not exist (for example after a duplicate entry was merged) map to an empty list. A missing or non-numeric `artist_ids`, or more than 200 ids, returns `400`. A request with 21 to 200 ids returns `402` until it is paid.
 
 ```json
 {
@@ -486,7 +486,7 @@ First and last event date.
 
 ### `GET /api/flyers`
 
-Index of the 61 monthly flyers from 2004–2009. The index is free, and the PDFs themselves are [paid](#flyer-pdfs).
+Index of the 61 monthly flyers from 2004–2009. The flyers are Berghain's own work, so this site does not host them: `source_url` is the official PDF on berghain.berlin, and `/flyers/:filename` redirects there.
 
 ```json
 [
@@ -496,7 +496,8 @@ Index of the 61 monthly flyers from 2004–2009. The index is free, and the PDFs
     "month": 12,
     "display_name": "2009-12",
     "url": "/flyers/berghain-flyer-2009-12.pdf",
-    "full_url": "https://berghain.ravers.workers.dev/flyers/berghain-flyer-2009-12.pdf"
+    "full_url": "https://berghain.ravers.workers.dev/flyers/berghain-flyer-2009-12.pdf",
+    "source_url": "https://www.berghain.berlin/documents/63/berghain-flyer-2009-12.pdf"
   }
 ]
 ```
@@ -526,7 +527,7 @@ Aggregated AI crawler activity, the data behind the [public dashboard](https://b
 
 ## Paid Endpoints (x402)
 
-These two groups answer `402 Payment Required` to every caller until paid through [x402](x402-ai-paywall.md) (USDC on Solana). Everything else in this document is free.
+The price follows what a request costs the database, not the kind of content. These routes answer `402 Payment Required` to every caller until paid through [x402](x402-ai-paywall.md) in USDC on Solana or Base. Everything else in this document is free.
 
 ### Bulk exports
 
@@ -538,11 +539,11 @@ Full-table dumps in JSON (default) or CSV (`?format=csv`). **$0.10 per request.*
 | `GET /api/export/events` | All events |
 | `GET /api/export/performances` | All performances |
 
-### Flyer PDFs
+### Large batches
 
 | Endpoint | Description |
 | --- | --- |
-| `GET /flyers/berghain-flyer-YYYY-MM.pdf` | Original monthly flyer PDF (2004–2009). **$0.01 per request.** |
+| `GET /api/performances?artist_ids=` | 21 to 200 artist ids in one request. **$0.01 per request.** Up to 20 ids stay free |
 
 ## Discovery, Feeds, and Status
 
@@ -578,8 +579,10 @@ curl -H "Accept: text/markdown" https://berghain.ravers.workers.dev/artists/ben-
 
 | When | Change |
 | --- | --- |
+| November 2026 | `/api/performances` accepts 21 to 200 `artist_ids` for $0.01 via x402 (up to 20 stay free) |
+| November 2026 | Flyer PDFs are no longer sold: `/flyers/*` redirects to the official PDF, and `/api/flyers` adds `source_url` |
 | November 2026 | `/api/residents/current` adds `berghain_performances_3y` and `panorama_performances_3y` |
 | November 2026 | New `/api/shows/upcoming` |
 | November 2026 | Ranking endpoints return `page_url` |
-| November 2026 | `/api/performances` accepts at most 20 `artist_ids` per request (previously 200) |
+| November 2026 | `/api/performances` is free for at most 20 `artist_ids` per request (previously 200) |
 | October 2026 | New `/api/performances` batch endpoint |
