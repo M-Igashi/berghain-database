@@ -38,7 +38,7 @@ Everything runs on Cloudflare's edge. There is no origin server, no container, a
 | Framework | [Hono](https://hono.dev/) 4 | Routing and middleware |
 | Database | Cloudflare D1 (SQLite) | Artists, events, performances |
 | Cache | In-memory → Workers KV → D1 | 3-tier response cache |
-| Storage | Cloudflare R2, Workers Static Assets | QR codes; font, icons, and share image |
+| Static files | Workers Static Assets | Font, icons, share image, and QR codes, served without running the Worker |
 | Scheduling | Cron Trigger | Daily cache warmup |
 
 ### Frontend

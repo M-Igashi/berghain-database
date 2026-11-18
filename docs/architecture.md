@@ -10,21 +10,18 @@ A single Cloudflare Worker serves the JSON API, every HTML page, and the Markdow
 Client (browser, API consumer, AI agent)
        │
        ▼
-Cloudflare edge network
-       │
+Cloudflare edge network ──► Static Assets (font, icons, share image,
+       │                     QR codes), served without running the Worker
        ▼
 ┌────────────────────────────────────────────────────────────────┐
 │  Cloudflare Worker (TypeScript, Hono)                           │
 │                                                                │
 │  Middleware ──► Routes ──► JSON  /  HTML  /  Markdown           │
 │                   │                                            │
-│     ┌─────────────┼──────────────┬───────────────┐             │
-│     ▼             ▼              ▼               ▼             │
-│  Response      R2 bucket     Static Assets   Analytics Engine  │
-│  cache         QR codes      font, icons,    AI crawler stats, │
-│  memory                      share image     x402 revenue      │
-│    → KV                                                        │
-│    → D1                                                        │
+│     ┌─────────────┴──────────────┐                             │
+│     ▼                            ▼                             │
+│  Response cache              Analytics Engine                  │
+│  memory → KV → D1            AI crawler stats, x402 revenue    │
 └────────────────────────────────────────────────────────────────┘
        ▲                                  │
        │ Cron Trigger (daily warmup)       ▼
@@ -43,8 +40,7 @@ Cloudflare edge network
 | Framework | Hono 4 | HTTP routing and middleware |
 | Database | Cloudflare D1 (SQLite) | Source of truth: artists, events, performances, precomputed co-performers |
 | Cache | In-memory `Map` and Workers KV | Response cache in front of D1 |
-| Object storage | Cloudflare R2 | QR codes |
-| Static assets | Workers Static Assets | Font files, icons, and the share image |
+| Static assets | Workers Static Assets | Font files, icons, the share image, and QR codes, served at the edge without invoking the Worker |
 | Scheduling | Cron Trigger | Daily cache warmup at 03:00 UTC |
 
 ### Application
@@ -99,7 +95,7 @@ Request → L1 (memory) hit? → return
          L2 (KV) hit? → fill L1, return
               │ miss
               ▼
-         L3 (D1) query → fill L2 and L1, return
+         L3 (D1) query → fill L1, return, then write L2 after the response
 ```
 
 ### Which data uses which tiers
@@ -134,7 +130,7 @@ D1 bills rows *scanned*, not rows returned, and a crawler sweep visits every URL
 - **Slug lookups use an index.** `/artists/:slug` resolves through an exact match on `normalized_name`. Unknown or partial slugs are matched against the cached artist list and never reach D1.
 - **Co-performers are precomputed.** The "most shared bills" on an artist page come from the `artist_coperformers` table (top 5 per artist) instead of a self-join over all performances.
 - **Counts are stored.** Per-artist totals live on the `artists` row and are recalculated after each import, so stats and rankings never count performances at request time.
-- **Unknown input is answered without D1.** A year outside the covered range returns an empty list immediately.
+- **Unknown input is answered without D1.** A year outside the covered range returns an empty list immediately, and an event id that is not a number gets its `404` right away.
 
 ## Frontend
 
@@ -172,6 +168,7 @@ Content-Signal: ai-train=no, search=yes, ai-input=yes
 - **Secrets** (admin key, wallet address, payment facilitator credentials) are stored as Worker secrets and never in the repository.
 - **Admin routes** require a key sent in a header, compared in constant time. The key is not accepted in the query string.
 - **The paywall ignores User-Agent**, so it cannot be bypassed by pretending to be a browser.
+- **HTML responses** carry `X-Content-Type-Options: nosniff` and `X-Frame-Options: SAMEORIGIN`.
 - **No cookies and no accounts.** Visitor data is limited to cookieless page view counts on the home page (Cloudflare Web Analytics).
 - **Security review**: code and configuration changes are reviewed with [Claude Code](https://claude.com/claude-code) running Claude Fable 5.2.
 
